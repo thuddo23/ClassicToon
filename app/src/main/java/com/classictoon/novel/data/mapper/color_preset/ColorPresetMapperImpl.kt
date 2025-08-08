@@ -1,0 +1,39 @@
+/*
+ * Book's Story — free and open-source Material You eBook reader.
+ * Copyright (C) 2024-2025 Acclorite
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
+package com.classictoon.novel.data.mapper.color_preset
+
+import androidx.compose.ui.graphics.Color
+import com.classictoon.novel.data.local.dto.ColorPresetEntity
+import com.classictoon.novel.domain.reader.ColorPreset
+import javax.inject.Inject
+
+class ColorPresetMapperImpl @Inject constructor() : ColorPresetMapper {
+    override suspend fun toColorPresetEntity(
+        colorPreset: ColorPreset,
+        order: Int
+    ): ColorPresetEntity {
+        return ColorPresetEntity(
+            id = if (colorPreset.id != -1) colorPreset.id
+            else null,
+            name = colorPreset.name,
+            backgroundColor = colorPreset.backgroundColor.value.toLong(),
+            fontColor = colorPreset.fontColor.value.toLong(),
+            isSelected = colorPreset.isSelected,
+            order = order
+        )
+    }
+
+    override suspend fun toColorPreset(colorPresetEntity: ColorPresetEntity): ColorPreset {
+        return ColorPreset(
+            id = colorPresetEntity.id!!,
+            name = colorPresetEntity.name,
+            backgroundColor = Color(colorPresetEntity.backgroundColor.toULong()),
+            fontColor = Color(colorPresetEntity.fontColor.toULong()),
+            isSelected = colorPresetEntity.isSelected
+        )
+    }
+}

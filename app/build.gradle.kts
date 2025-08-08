@@ -12,11 +12,11 @@ plugins {
 }
 
 android {
-    namespace = "ua.acclorite.book_story"
+    namespace = "com.classictoon.novel"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ua.acclorite.book_story"
+        applicationId = "com.classictoon.novel"
         minSdk = 26
         targetSdk = 35
         versionCode = 13
