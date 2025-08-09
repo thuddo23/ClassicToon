@@ -6,6 +6,7 @@
 
 package com.classictoon.novel.presentation.browse
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Row
@@ -25,6 +26,7 @@ import com.classictoon.novel.domain.browse.file.SelectableFile
 import com.classictoon.novel.presentation.core.components.common.CircularCheckbox
 import com.classictoon.novel.ui.theme.FadeTransitionPreservingSpace
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BrowseListItem(
     modifier: Modifier,

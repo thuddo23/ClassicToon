@@ -6,6 +6,7 @@
 
 package com.classictoon.novel.presentation.library
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
@@ -40,6 +41,7 @@ import com.classictoon.novel.presentation.core.components.common.AsyncCoverImage
 import com.classictoon.novel.presentation.core.components.common.StyledText
 import com.classictoon.novel.presentation.core.util.calculateProgress
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyGridItemScope.LibraryItem(
     book: SelectableBook,

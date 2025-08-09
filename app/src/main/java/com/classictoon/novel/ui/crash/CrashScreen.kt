@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.ClipEntry
-import androidx.compose.ui.platform.LocalClipboard
+import androidx.compose.ui.platform.LocalClipboardManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
@@ -32,7 +32,7 @@ object CrashScreen : Screen, Parcelable {
     @Composable
     override fun Content() {
         val activity = LocalActivity.current
-        val clipboard = LocalClipboard.current
+        val clipboard = LocalClipboardManager.current
         val scope = rememberCoroutineScope()
 
         val crashLog = remember {
@@ -44,7 +44,7 @@ object CrashScreen : Screen, Parcelable {
             copy = {
                 if (crashLog.isNullOrBlank()) return@CrashContent
                 scope.launch(Dispatchers.Main) {
-                    clipboard.setClipEntry(
+                    clipboard.setClip(
                         ClipEntry(ClipData.newPlainText("Crash", crashLog))
                     )
 

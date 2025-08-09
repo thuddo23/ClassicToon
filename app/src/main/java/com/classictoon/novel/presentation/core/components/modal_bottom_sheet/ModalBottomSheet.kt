@@ -59,7 +59,7 @@ fun ModalBottomSheet(
                 )
                 .fillMaxWidth()
                 .then(modifier),
-            sheetGesturesEnabled = sheetGesturesEnabled,
+//            sheetGesturesEnabled = sheetGesturesEnabled,
             onDismissRequest = {
                 onDismissRequest()
             },

@@ -17,7 +17,6 @@ import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -39,7 +38,7 @@ import com.classictoon.novel.ui.reader.ReaderEvent
 import com.classictoon.novel.ui.settings.SettingsEvent
 import com.classictoon.novel.ui.theme.readerBarsColor
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReaderTopBar(
     book: Book,
@@ -115,7 +114,7 @@ fun ReaderTopBar(
                     maxLines = 1
                 )
             },
-            subtitle = {
+            /*subtitle = {
                 StyledText(
                     text = currentChapter?.title
                         ?: activity.getString(R.string.no_chapters),
@@ -125,7 +124,7 @@ fun ReaderTopBar(
                     ),
                     maxLines = 1
                 )
-            },
+            },*/
             actions = {
                 if (currentChapter != null) {
                     IconButton(

@@ -6,6 +6,7 @@
 
 package com.classictoon.novel.presentation.browse
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +22,7 @@ import com.classictoon.novel.domain.browse.file.SelectableFile
 import com.classictoon.novel.presentation.core.components.common.LazyColumnWithScrollbar
 import com.classictoon.novel.presentation.core.constants.providePrimaryScrollbar
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BrowseListLayout(
     groupedFiles: List<GroupedFiles>,

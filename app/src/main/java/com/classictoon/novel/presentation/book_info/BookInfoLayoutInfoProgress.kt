@@ -8,8 +8,7 @@ package com.classictoon.novel.presentation.book_info
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.LinearWavyProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -21,7 +20,6 @@ import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.presentation.core.components.common.StyledText
 import com.classictoon.novel.presentation.core.util.calculateProgress
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun BookInfoLayoutInfoProgress(
     book: Book
@@ -34,13 +32,10 @@ fun BookInfoLayoutInfoProgress(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        LinearWavyProgressIndicator(
+        LinearProgressIndicator(
             progress = { book.progress.coerceIn(0f, 1f) },
             trackColor = MaterialTheme.colorScheme.secondaryContainer.copy(0.7f),
             modifier = Modifier.weight(1f),
-            amplitude = { 0.5f },
-            wavelength = 80.dp,
-            waveSpeed = 15.dp
         )
         StyledText(
             text = progress,

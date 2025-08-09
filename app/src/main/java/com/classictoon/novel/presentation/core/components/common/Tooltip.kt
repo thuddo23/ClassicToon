@@ -33,7 +33,7 @@ fun Tooltip(
     content: @Composable () -> Unit
 ) {
     TooltipBox(
-        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(padding),
+        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(padding),
         focusable = false,
         enableUserInput = enabled,
         tooltip = {
