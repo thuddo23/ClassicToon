@@ -7,7 +7,7 @@ ksp = "2.1.10-1.0.30"
 # Android
 compileSdk = "36"
 minSdk = "26"
-targetSdk = "35"
+targetSdk = "36"
 
 # AndroidX Core
 androidxCore = "1.16.0"
@@ -68,6 +68,8 @@ androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-compose-ui-android = { group = "androidx.compose.ui", name = "ui-android" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3-window-size = { group = "androidx.compose.material3", name = "material3-window-size-class" }
 androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material" }
@@ -121,7 +123,9 @@ compose = [
     "androidx-compose-material3",
     "androidx-compose-material3-window-size",
     "androidx-compose-material-icons-extended",
-    "androidx-compose-material"
+    "androidx-compose-material",
+    "androidx-compose-ui-tooling",
+    "androidx-compose-ui-tooling-preview"
 ]
 
 androidx-core = [

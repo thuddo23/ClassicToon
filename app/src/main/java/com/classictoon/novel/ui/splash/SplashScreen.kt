@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -72,11 +74,10 @@ object SplashScreen : Screen, Parcelable {
         ) {
             // Background image placeholder - will be replaced with actual background later
             Image(
-                painter = painterResource(id = R.drawable.app_icon), // Placeholder
+                painter = painterResource(id = R.drawable.img_splash), // Placeholder
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
-                alpha = 0.3f
             )
             
             Column(
@@ -84,18 +85,8 @@ object SplashScreen : Screen, Parcelable {
                     .fillMaxSize()
                     .padding(horizontal = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Bottom
             ) {
-                // Character illustration placeholder - will be replaced with actual character later
-                Image(
-                    painter = painterResource(id = R.drawable.app_icon), // Placeholder
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(300.dp)
-                        .padding(bottom = 40.dp),
-                    contentScale = ContentScale.Fit
-                )
-                
                 // Welcome text
                 Text(
                     text = stringResource(id = R.string.loading_welcome_to),
@@ -109,13 +100,10 @@ object SplashScreen : Screen, Parcelable {
                 Spacer(modifier = Modifier.height(8.dp))
                 
                 // App title
-                Text(
-                    text = stringResource(id = R.string.loading_app_title),
-                    color = Color.White,
-                    fontSize = 36.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    letterSpacing = 1.sp
+                Image(
+                    painter = painterResource(id = R.drawable.img_text_classictoon),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxWidth(0.7f)
                 )
                 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -138,7 +126,15 @@ object SplashScreen : Screen, Parcelable {
                     color = Color.White,
                     strokeWidth = 3.dp
                 )
+
+                Spacer(Modifier.height(60.dp))
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun SplashScreenPreview() {
+    SplashScreen.Content()
 }
