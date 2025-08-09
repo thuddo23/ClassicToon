@@ -1,24 +1,24 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
-    id("kotlin-parcelize")
-    id("com.mikepenz.aboutlibraries.plugin")
-    id("androidx.room")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.aboutlibraries)
+    alias(libs.plugins.room)
 }
 
 android {
     namespace = "com.classictoon.novel"
-    compileSdk = 35
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.classictoon.novel"
-        minSdk = 26
-        targetSdk = 35
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 13
         versionName = "1.7.1"
 
@@ -83,82 +83,53 @@ aboutLibraries {
 
 dependencies {
 
-    // Core
-    implementation("androidx.core:core-ktx:1.16.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
-    implementation("androidx.activity:activity-compose:1.10.1")
+    // Core AndroidX
+    implementation(libs.bundles.androidx.core)
 
-    // Compose BOM libraries
-    // Compose BOM was eliminated - it is recognized as Closed Source in AboutLibraries..
-    // although it is not.
-    implementation("androidx.compose.foundation:foundation:1.8.0-beta03")
-    implementation("androidx.compose.animation:animation:1.7.8")
-    implementation("androidx.compose.animation:animation-android:1.8.0-beta03")
-    implementation("androidx.compose.foundation:foundation-layout:1.7.8")
-    implementation("androidx.compose.ui:ui:1.7.8")
-    implementation("androidx.compose.ui:ui-graphics:1.7.8")
-    implementation("androidx.compose.ui:ui-android:1.8.0-beta03")
-    implementation("androidx.compose.material3:material3:1.4.0-alpha08")
-    implementation("androidx.compose.material3:material3-window-size-class:1.3.1")
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
-    implementation("androidx.compose.material:material:1.7.8")
+    // Compose
+    implementation(libs.bundles.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    // All dependencies
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.36.0")
+    // Accompanist
+    implementation(libs.accompanist.swiperefresh)
 
     // Dagger - Hilt
-    implementation("com.google.dagger:hilt-android:2.55")
-    ksp("com.google.dagger:hilt-android-compiler:2.55")
-    implementation("com.google.dagger:hilt-compiler:2.55")
-    ksp("androidx.hilt:hilt-compiler:1.2.0")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation(libs.bundles.hilt)
+    implementation(libs.hilt.compiler)
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.androidx.hilt.compiler)
 
     // Room
-    implementation("androidx.room:room-runtime:2.7.1")
-    ksp("androidx.room:room-compiler:2.7.1")
-
-    // Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:2.7.1")
+    implementation(libs.bundles.room)
+    ksp(libs.androidx.room.compiler)
 
     // Datastore (Settings)
-    implementation("androidx.datastore:datastore-preferences:1.1.3")
+    implementation(libs.androidx.datastore.preferences)
 
     // Splash Screen API
-    implementation("androidx.core:core-splashscreen:1.0.1")
-
-    // SAF
-    implementation("com.anggrayudi:storage:2.0.0")
-
-    // PDF parser
-    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
-
-    // EPUB parser
-    implementation("org.jsoup:jsoup:1.18.3")
-
-    // FB2 parser
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1")
+    implementation(libs.androidx.core.splashscreen)
 
     // Language Switcher
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.appcompat:appcompat-resources:1.7.0")
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.appcompat.resources)
 
-    // Coil for loading images
-    implementation("io.coil-kt:coil-compose:2.7.0")
+    // File handling
+    implementation(libs.anggrayudi.storage)
+    implementation(libs.tomroush.pdfbox.android)
 
-    // Open source libraries
-    implementation("com.mikepenz:aboutlibraries-core:11.4.0")
-    implementation("com.mikepenz:aboutlibraries-compose-m3:11.4.0")
+    // Parsing
+    implementation(libs.jsoup)
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.commonmark)
 
-    // Drag & Drop
-    implementation("sh.calvin.reorderable:reorderable:2.4.3")
+    // UI Libraries
+    implementation(libs.coil.compose)
+    implementation(libs.reorderable)
+    implementation(libs.lazycolumnscrollbar)
 
-    // Scrollbar
-    implementation("com.github.nanihadesuka:LazyColumnScrollbar:2.2.0")
+    // About Libraries
+    implementation(libs.bundles.aboutlibraries)
 
-    // Gson
-    implementation("com.google.code.gson:gson:2.11.0")
-
-    // Markdown
-    implementation("org.commonmark:commonmark:0.24.0")
+    // JSON
+    implementation(libs.gson)
 }
