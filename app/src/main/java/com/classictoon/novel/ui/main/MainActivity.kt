@@ -42,7 +42,7 @@ import com.classictoon.novel.ui.settings.SettingsModel
 import com.classictoon.novel.ui.start.StartScreen
 import com.classictoon.novel.ui.theme.BookStoryTheme
 import com.classictoon.novel.ui.theme.Transitions
-import com.classictoon.novel.presentation.splash.SplashScreen
+import com.classictoon.novel.ui.splash.SplashScreen
 import java.lang.reflect.Field
 
 
@@ -115,58 +115,52 @@ class MainActivity : AppCompatActivity() {
 
             MainActivityKeyboardManager()
 
-            if (!isLoaded.value) {
-                // Show loading screen while app is initializing
-                SplashScreen()
-            } else {
-                BookStoryTheme(
-                    theme = state.value.theme,
-                    isDark = state.value.darkTheme.isDark(),
-                    isPureDark = state.value.pureDark.isPureDark(this),
-                    themeContrast = state.value.themeContrast
-                ) {
-                    Navigator(
-                        initialScreen = if (state.value.showStartScreen) StartScreen
-                        else LibraryScreen,
-                        transitionSpec = { lastEvent ->
-                            when (lastEvent) {
-                                StackEvent.Default -> {
-                                    Transitions.SlidingTransitionIn
-                                        .togetherWith(Transitions.SlidingTransitionOut)
-                                }
-
-                                StackEvent.Pop -> {
-                                    Transitions.BackSlidingTransitionIn
-                                        .togetherWith(Transitions.BackSlidingTransitionOut)
-                                }
-                            }
-                        },
-                        contentKey = {
-                            when (it) {
-                                LibraryScreen, HistoryScreen, BrowseScreen -> "tabs"
-                                else -> it
-                            }
-                        },
-                        backHandlerEnabled = { it != StartScreen }
-                    ) { screen ->
-                        when (screen) {
-                            LibraryScreen, HistoryScreen, BrowseScreen -> {
-                                NavigatorTabs(
-                                    currentTab = screen,
-                                    transitionSpec = {
-                                        Transitions.FadeTransitionIn
-                                            .togetherWith(Transitions.FadeTransitionOut)
-                                    },
-                                    navigationBar = { NavigationBar(tabs = tabs) },
-                                    navigationRail = { NavigationRail(tabs = tabs) }
-                                ) { tab ->
-                                    tab.Content()
-                                }
+            BookStoryTheme(
+                theme = state.value.theme,
+                isDark = state.value.darkTheme.isDark(),
+                isPureDark = state.value.pureDark.isPureDark(this),
+                themeContrast = state.value.themeContrast
+            ) {
+                Navigator(
+                    initialScreen = SplashScreen,
+                    transitionSpec = { lastEvent ->
+                        when (lastEvent) {
+                            StackEvent.Default -> {
+                                Transitions.SlidingTransitionIn
+                                    .togetherWith(Transitions.SlidingTransitionOut)
                             }
 
-                            else -> {
-                                screen.Content()
+                            StackEvent.Pop -> {
+                                Transitions.BackSlidingTransitionIn
+                                    .togetherWith(Transitions.BackSlidingTransitionOut)
                             }
+                        }
+                    },
+                    contentKey = {
+                        when (it) {
+                            LibraryScreen, HistoryScreen, BrowseScreen -> "tabs"
+                            else -> it
+                        }
+                    },
+                    backHandlerEnabled = { it != StartScreen && it != SplashScreen }
+                ) { screen ->
+                    when (screen) {
+                        LibraryScreen, HistoryScreen, BrowseScreen -> {
+                            NavigatorTabs(
+                                currentTab = screen,
+                                transitionSpec = {
+                                    Transitions.FadeTransitionIn
+                                        .togetherWith(Transitions.FadeTransitionOut)
+                                },
+                                navigationBar = { NavigationBar(tabs = tabs) },
+                                navigationRail = { NavigationRail(tabs = tabs) }
+                            ) { tab ->
+                                tab.Content()
+                            }
+                        }
+
+                        else -> {
+                            screen.Content()
                         }
                     }
                 }
