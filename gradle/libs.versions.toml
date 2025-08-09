@@ -11,9 +11,9 @@ targetSdk = "35"
 
 # AndroidX Core
 androidxCore = "1.16.0"
-androidxLifecycle = "2.8.7"
+androidxLifecycle = "2.9.2"
 androidxActivity = "1.10.1"
-androidxAppcompat = "1.7.0"
+androidxAppcompat = "1.7.1"
 androidxDatastore = "1.1.3"
 androidxSplashscreen = "1.0.1"
 
@@ -26,22 +26,22 @@ hilt = "2.55"
 hiltNavigation = "1.2.0"
 
 # Database
-room = "2.7.1"
+room = "2.7.2"
 
 # Networking & Parsing
-jsoup = "1.18.3"
-gson = "2.11.0"
+jsoup = "1.21.1"
+gson = "2.13.1"
 kotlinxSerialization = "1.8.1"
-commonmark = "0.24.0"
+commonmark = "0.25.1"
 
 # UI Libraries
 accompanist = "0.36.0"
 coil = "2.7.0"
-reorderable = "2.4.3"
+reorderable = "2.5.1"
 lazyColumnScrollbar = "2.2.0"
 
 # File handling
-storage = "2.0.0"
+storage = "2.2.0"
 pdfbox = "2.0.27.0"
 
 # About Libraries
