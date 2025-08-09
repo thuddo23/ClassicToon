@@ -555,6 +555,11 @@
         teach and lead on incredible adventures!
         Let\'s set some things up!
     </string>
+    
+    <!-- Loading Screen -->
+    <string name="loading_welcome_to">WELCOME TO</string>
+    <string name="loading_app_title">ClassiCTooN</string>
+    <string name="loading_subtitle">Make classic novels easy to read like manga</string>
     <string name="start_language_preferences">Language preferences</string>
     <string name="start_theme_preferences">Theme preferences</string>
     <string name="start_scan_preferences">Scan preferences</string>

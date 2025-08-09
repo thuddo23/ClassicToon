@@ -1,0 +1,111 @@
+/*
+ * Book's Story — free and open-source Material You eBook reader.
+ * Copyright (C) 2024-2025 Acclorite
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
+package com.classictoon.novel.presentation.splash
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.classictoon.novel.R
+
+@Composable
+fun SplashScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
+    ) {
+        // Background image placeholder - will be replaced with actual background later
+        Image(
+            painter = painterResource(id = R.drawable.app_icon), // Placeholder
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
+            alpha = 0.3f
+        )
+        
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            // Character illustration placeholder - will be replaced with actual character later
+            Image(
+                painter = painterResource(id = R.drawable.app_icon), // Placeholder
+                contentDescription = null,
+                modifier = Modifier
+                    .size(300.dp)
+                    .padding(bottom = 40.dp),
+                contentScale = ContentScale.Fit
+            )
+            
+            // Welcome text
+            Text(
+                text = stringResource(id = R.string.loading_welcome_to),
+                color = Color.White,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center,
+                letterSpacing = 2.sp
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            // App title
+            Text(
+                text = stringResource(id = R.string.loading_app_title),
+                color = Color.White,
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                letterSpacing = 1.sp
+            )
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // Subtitle
+            Text(
+                text = stringResource(id = R.string.loading_subtitle),
+                color = Color.White.copy(alpha = 0.8f),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+            
+            Spacer(modifier = Modifier.height(60.dp))
+            
+            // Loading spinner
+            CircularProgressIndicator(
+                modifier = Modifier.size(40.dp),
+                color = Color.White,
+                strokeWidth = 3.dp
+            )
+        }
+    }
+}

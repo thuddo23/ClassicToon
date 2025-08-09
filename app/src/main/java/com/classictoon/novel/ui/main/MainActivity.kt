@@ -42,6 +42,7 @@ import com.classictoon.novel.ui.settings.SettingsModel
 import com.classictoon.novel.ui.start.StartScreen
 import com.classictoon.novel.ui.theme.BookStoryTheme
 import com.classictoon.novel.ui.theme.Transitions
+import com.classictoon.novel.presentation.splash.SplashScreen
 import java.lang.reflect.Field
 
 
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         // Splash screen
         installSplashScreen().apply {
             setKeepOnScreenCondition {
-                !mainModel.isReady.value
+                /*!mainModel.isReady.value*/ false
             }
         }
 
@@ -114,7 +115,10 @@ class MainActivity : AppCompatActivity() {
 
             MainActivityKeyboardManager()
 
-            if (isLoaded.value) {
+            if (!isLoaded.value) {
+                // Show loading screen while app is initializing
+                SplashScreen()
+            } else {
                 BookStoryTheme(
                     theme = state.value.theme,
                     isDark = state.value.darkTheme.isDark(),

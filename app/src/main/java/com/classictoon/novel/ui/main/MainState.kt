@@ -66,7 +66,7 @@ data class MainState(
     val pureDark: PureDark = provideDefaultValue { PureDark.OFF },
     val absoluteDark: Boolean = provideDefaultValue { false },
     val themeContrast: ThemeContrast = provideDefaultValue { ThemeContrast.STANDARD },
-    val showStartScreen: Boolean = provideDefaultValue { true },
+    val showStartScreen: Boolean = provideDefaultValue { false }, // this variable kinda for onboarding flow
     val doublePressExit: Boolean = provideDefaultValue { false },
 
     // Reader Settings

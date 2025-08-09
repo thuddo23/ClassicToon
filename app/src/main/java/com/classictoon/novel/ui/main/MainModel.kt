@@ -41,6 +41,8 @@ import com.classictoon.novel.presentation.core.constants.DataStoreConstants
 import com.classictoon.novel.presentation.core.constants.provideFonts
 import com.classictoon.novel.presentation.core.constants.provideMainState
 import com.classictoon.novel.ui.theme.toTheme
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 
@@ -536,13 +538,19 @@ class MainModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.Main) {
-            isReady.first { bool ->
-                if (bool) {
-                    _isReady.update {
-                        true
-                    }
-                }
-                bool
+            val fiveSecondsPassed = async {
+                delay(5000L)
+                true
+            }
+
+            val modelsReady = async {
+                isReady.first { it }
+                true
+            }
+
+            // Wait until both are ready
+            if (fiveSecondsPassed.await() && modelsReady.await()) {
+                _isReady.update { true }
             }
         }
     }
