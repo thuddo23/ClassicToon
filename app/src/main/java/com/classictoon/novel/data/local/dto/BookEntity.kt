@@ -21,5 +21,6 @@ data class BookEntity(
     val scrollOffset: Int,
     val progress: Float,
     val image: String? = null,
-    val category: Category
+    val category: Category,
+    val remoteBookId: String? = null
 )

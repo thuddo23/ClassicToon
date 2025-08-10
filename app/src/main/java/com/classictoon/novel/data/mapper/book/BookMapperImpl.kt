@@ -25,7 +25,8 @@ class BookMapperImpl @Inject constructor() : BookMapper {
             author = book.author.getAsString(),
             description = book.description,
             image = book.coverImage?.toString(),
-            category = book.category
+            category = book.category,
+            remoteBookId = null // Local books don't have remote ID
         )
     }
 
