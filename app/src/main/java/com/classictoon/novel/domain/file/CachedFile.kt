@@ -25,7 +25,7 @@ import java.util.UUID
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 @Immutable
-class CachedFile(
+open class CachedFile(
     private val context: Context,
     val uri: Uri,
     private val builder: CachedFileBuilder? = null
@@ -41,15 +41,15 @@ class CachedFile(
     private val queryParams by lazy {
         getFileQueryParams()
     }
-    val path: String by lazy { builder?.path ?: getFilePath() }
+    internal open val path: String by lazy { builder?.path ?: getFilePath() }
     val rawFile: File? by lazy { storeInCache() }
 
-    val name: String get() = builder?.name ?: queryParams.name
-    val size: Long get() = builder?.size ?: queryParams.size
-    val lastModified: Long get() = builder?.lastModified ?: queryParams.lastModified
-    val isDirectory: Boolean get() = builder?.isDirectory ?: queryParams.isDirectory
+    internal open val name: String get() = builder?.name ?: queryParams.name
+    internal open val size: Long get() = builder?.size ?: queryParams.size
+    internal open val lastModified: Long get() = builder?.lastModified ?: queryParams.lastModified
+    internal open val isDirectory: Boolean get() = builder?.isDirectory ?: queryParams.isDirectory
 
-    fun canAccess(): Boolean {
+    open fun canAccess(): Boolean {
         return try {
             context.contentResolver.query(uri, null, null, null, null)?.let {
                 it.close()
@@ -61,7 +61,7 @@ class CachedFile(
         }
     }
 
-    fun openInputStream(): InputStream? {
+    open fun openInputStream(): InputStream? {
         return try {
             context.contentResolver.openInputStream(uri)
                 ?: throw Exception("Failed to open InputStream for URI: $uri")

@@ -8,8 +8,10 @@ package com.classictoon.novel.data.di
 
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import com.classictoon.novel.BuildConfig
 import com.classictoon.novel.data.local.data_store.DataStore
 import com.classictoon.novel.data.local.data_store.DataStoreImpl
 import com.classictoon.novel.data.mapper.book.BookMapper
@@ -25,6 +27,7 @@ import com.classictoon.novel.data.parser.TextParserImpl
 import com.classictoon.novel.data.repository.BookRepositoryImpl
 import com.classictoon.novel.data.repository.ColorPresetRepositoryImpl
 import com.classictoon.novel.data.repository.DataStoreRepositoryImpl
+import com.classictoon.novel.data.repository.DebugBookRepositoryImpl
 import com.classictoon.novel.data.repository.FileSystemRepositoryImpl
 import com.classictoon.novel.data.repository.HistoryRepositoryImpl
 import com.classictoon.novel.data.repository.PermissionRepositoryImpl
@@ -45,11 +48,20 @@ abstract class RepositoryModule {
         dataStoreImpl: DataStoreImpl
     ): DataStore
 
-    @Binds
-    @Singleton
-    abstract fun bindBookRepository(
-        bookRepositoryImpl: BookRepositoryImpl
-    ): BookRepository
+    companion object {
+        @Provides
+        @Singleton
+        fun provideBookRepository(
+            bookRepositoryImpl: BookRepositoryImpl,
+            debugBookRepositoryImpl: DebugBookRepositoryImpl
+        ): BookRepository {
+            return if (BuildConfig.DEBUG) {
+                debugBookRepositoryImpl
+            } else {
+                bookRepositoryImpl
+            }
+        }
+    }
 
     @Binds
     @Singleton

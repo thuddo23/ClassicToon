@@ -6,7 +6,9 @@
 
 package com.classictoon.novel.presentation.core.components.progress_indicator
 
+import androidx.compose.material3.CircularProgressIndicator as ComposeCircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,10 +22,10 @@ fun CircularProgressIndicator(
     strokeWidth: Dp = 4.dp,
     gapSize: Dp = 2.dp
 ) {
-    CircularProgressIndicator(
+    ComposeCircularProgressIndicator(
         modifier = modifier,
         color = color,
         strokeWidth = strokeWidth,
-        gapSize = gapSize
+        trackColor = Color.Transparent,
     )
 }
