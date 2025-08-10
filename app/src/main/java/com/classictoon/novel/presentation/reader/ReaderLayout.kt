@@ -188,7 +188,7 @@ fun ReaderLayout(
                     key = { index, _ -> index }
                 ) { index, entry ->
                     when {
-                        !images && entry is ReaderText.Image -> return@itemsIndexed
+                        !images && (entry is ReaderText.Image || entry is ReaderText.RemoteImage) -> return@itemsIndexed
                         else -> {
                             SpacedItem(
                                 index = index,

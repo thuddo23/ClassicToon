@@ -64,6 +64,17 @@ fun LazyItemScope.ReaderLayoutText(
             )
         }
 
+        is ReaderText.RemoteImage -> {
+            ReaderLayoutTextRemoteImage(
+                entry = entry,
+                sidePadding = sidePadding,
+                imagesCornersRoundness = imagesCornersRoundness,
+                imagesAlignment = imagesAlignment,
+                imagesWidth = imagesWidth,
+                imagesColorEffects = imagesColorEffects
+            )
+        }
+
         is ReaderText.Separator -> {
             ReaderLayoutTextSeparator(
                 sidePadding = sidePadding,

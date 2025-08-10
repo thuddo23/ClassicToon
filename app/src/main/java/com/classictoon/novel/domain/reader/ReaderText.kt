@@ -30,4 +30,9 @@ sealed class ReaderText {
     data class Image(
         val imageBitmap: ImageBitmap
     ) : ReaderText()
+
+    @Immutable
+    data class RemoteImage(
+        val url: String
+    ) : ReaderText()
 }

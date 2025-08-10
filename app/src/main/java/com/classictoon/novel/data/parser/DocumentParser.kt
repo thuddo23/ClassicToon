@@ -80,21 +80,27 @@ class DocumentParser @Inject constructor(
 
                 // Image (<img>)
                 select("img").forEach { element ->
-                    val src = element.attr("src")
-                        .trim()
-                        .substringAfterLast(File.separator)
-                        .lowercase()
-                        .takeIf {
-                            it.containsVisibleText() && imageEntries?.any { image ->
-                                it == image.name.substringAfterLast(File.separator).lowercase()
-                            } == true
-                        } ?: return@forEach
-
+                    val src = element.attr("src").trim()
                     val alt = element.attr("alt").trim().takeIf {
                         it.clearMarkdown().containsVisibleText()
                     } ?: src.substringBeforeLast(".")
 
-                    element.append("\n[[$src|$alt]]\n")
+                    // Check if this is a remote image (HTTP/HTTPS URL)
+                    if (src.startsWith("http://") || src.startsWith("https://")) {
+                        // Handle remote image
+                        element.append("\n[[REMOTE:$src|$alt]]\n")
+                    } else {
+                        // Handle local image (existing logic)
+                        val localSrc = src.substringAfterLast(File.separator)
+                            .lowercase()
+                            .takeIf {
+                                it.containsVisibleText() && imageEntries?.any { image ->
+                                    it == image.name.substringAfterLast(File.separator).lowercase()
+                                } == true
+                            } ?: return@forEach
+
+                        element.append("\n[[$localSrc|$alt]]\n")
+                    }
                 }
 
                 // Image (<image>)
@@ -133,28 +139,44 @@ class DocumentParser @Inject constructor(
                             val src = trimmedLine.substringBefore("|")
                             val alt = "_${trimmedLine.substringAfter("|")}_"
 
-                            val image = try {
-                                val imageEntry = imageEntries?.find { image ->
-                                    src == image.name.substringAfterLast(File.separator).lowercase()
+                            // Check if this is a remote image
+                            if (src.startsWith("REMOTE:")) {
+                                val remoteUrl = src.substringAfter("REMOTE:")
+                                readerText.add( // Adding remote image
+                                    ReaderText.RemoteImage(
+                                        url = remoteUrl
+                                    )
+                                )
+                                readerText.add( // Adding alternative text (caption) for image
+                                    ReaderText.Text(
+                                        markdownParser.parse(alt)
+                                    )
+                                )
+                            } else {
+                                // Handle local image (existing logic)
+                                val image = try {
+                                    val imageEntry = imageEntries?.find { image ->
+                                        src == image.name.substringAfterLast(File.separator).lowercase()
+                                    } ?: return@forEach
+
+                                    zipFile?.getImage(imageEntry)?.asImageBitmap()
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                    null
                                 } ?: return@forEach
 
-                                zipFile?.getImage(imageEntry)?.asImageBitmap()
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                null
-                            } ?: return@forEach
-
-                            image.prepareToDraw()
-                            readerText.add( // Adding image
-                                ReaderText.Image(
-                                    imageBitmap = image
+                                image.prepareToDraw()
+                                readerText.add( // Adding image
+                                    ReaderText.Image(
+                                        imageBitmap = image
+                                    )
                                 )
-                            )
-                            readerText.add( // Adding alternative text (caption) for image
-                                ReaderText.Text(
-                                    markdownParser.parse(alt)
+                                readerText.add( // Adding alternative text (caption) for image
+                                    ReaderText.Text(
+                                        markdownParser.parse(alt)
+                                    )
                                 )
-                            )
+                            }
                         }
 
                         line == "---" || line == "***" -> readerText.add(ReaderText.Separator)

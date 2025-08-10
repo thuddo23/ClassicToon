@@ -6,6 +6,8 @@
 
 package com.classictoon.novel.presentation.reader
 
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,9 +20,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
+import coil.compose.AsyncImage
 import com.classictoon.novel.domain.reader.ReaderText
 import com.classictoon.novel.domain.util.HorizontalAlignment
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyItemScope.ReaderLayoutTextImage(
     entry: ReaderText.Image,
@@ -32,9 +36,8 @@ fun LazyItemScope.ReaderLayoutTextImage(
 ) {
     Box(
         modifier = Modifier
-            .animateItem(
-                fadeInSpec = null,
-                fadeOutSpec = null
+            .animateItemPlacement(
+                animationSpec = tween(durationMillis = 300)
             )
             .padding(horizontal = sidePadding)
             .fillMaxWidth(),
@@ -48,6 +51,46 @@ fun LazyItemScope.ReaderLayoutTextImage(
             contentDescription = null,
             colorFilter = imagesColorEffects,
             contentScale = ContentScale.FillWidth
+        )
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun LazyItemScope.ReaderLayoutTextRemoteImage(
+    entry: ReaderText.RemoteImage,
+    sidePadding: Dp,
+    imagesCornersRoundness: Dp,
+    imagesAlignment: HorizontalAlignment,
+    imagesWidth: Float,
+    imagesColorEffects: ColorFilter?
+) {
+    Box(
+        modifier = Modifier
+            .animateItemPlacement(
+                animationSpec = tween(durationMillis = 300)
+            )
+            .padding(horizontal = sidePadding)
+            .fillMaxWidth(),
+        contentAlignment = imagesAlignment.alignment
+    ) {
+        AsyncImage(
+            model = entry.url,
+            contentDescription = null,
+            modifier = Modifier
+                .clip(RoundedCornerShape(imagesCornersRoundness))
+                .fillMaxWidth(imagesWidth),
+            colorFilter = imagesColorEffects,
+            contentScale = ContentScale.FillWidth,
+            // Enhanced loading and error handling
+            onLoading = { 
+                // You can add a loading placeholder here
+                // For now, the AsyncImage will show a loading state automatically
+            },
+            onError = { 
+                // You can add an error placeholder here
+                // For now, the AsyncImage will show an error state automatically
+            }
         )
     }
 }
