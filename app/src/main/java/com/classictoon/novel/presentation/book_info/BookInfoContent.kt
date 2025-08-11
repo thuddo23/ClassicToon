@@ -41,7 +41,7 @@ fun BookInfoContent(
     dismissDialog: (BookInfoEvent.OnDismissDialog) -> Unit,
     dismissBottomSheet: (BookInfoEvent.OnDismissBottomSheet) -> Unit,
     navigateToReader: () -> Unit,
-    navigateToLibrary: () -> Unit,
+    navigateToHome: () -> Unit,
     navigateBack: () -> Unit
 ) {
     BookInfoDialog(
@@ -54,7 +54,7 @@ fun BookInfoContent(
         actionDeleteDialog = actionDeleteDialog,
         actionMoveDialog = actionMoveDialog,
         dismissDialog = dismissDialog,
-        navigateToLibrary = navigateToLibrary,
+        navigateToHome = navigateToHome,
         navigateBack = navigateBack
     )
 

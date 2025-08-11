@@ -26,7 +26,7 @@ fun BookInfoMoveDialog(
     book: Book,
     actionMoveDialog: (BookInfoEvent.OnActionMoveDialog) -> Unit,
     dismissDialog: (BookInfoEvent.OnDismissDialog) -> Unit,
-    navigateToLibrary: () -> Unit
+    navigateToHome: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -50,7 +50,7 @@ fun BookInfoMoveDialog(
                 BookInfoEvent.OnActionMoveDialog(
                     category = selectedCategory.value,
                     context = context,
-                    navigateToLibrary = navigateToLibrary
+                    navigateToHome = navigateToHome
                 )
             )
         },

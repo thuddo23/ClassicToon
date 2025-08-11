@@ -384,7 +384,7 @@ class BookInfoModel @Inject constructor(
                                 .showToast(context = event.context)
                         }
 
-                        event.navigateToLibrary()
+                        event.navigateToHome()
                     }
                 }
 

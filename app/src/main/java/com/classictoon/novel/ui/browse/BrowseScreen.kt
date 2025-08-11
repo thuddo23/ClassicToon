@@ -28,7 +28,7 @@ import com.classictoon.novel.domain.browse.display.BrowseLayout
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.browse.BrowseContent
 import com.classictoon.novel.presentation.navigator.LocalNavigator
-import com.classictoon.novel.ui.library.LibraryScreen
+import com.classictoon.novel.presentation.server_books.ServerBooksScreen
 import com.classictoon.novel.ui.main.MainModel
 import com.classictoon.novel.ui.settings.BrowseSettingsScreen
 
@@ -165,8 +165,8 @@ object BrowseScreen : Screen, Parcelable {
             selectAddDialog = screenModel::onEvent,
             actionAddDialog = screenModel::onEvent,
             changePinnedPaths = mainModel::onEvent,
-            navigateToLibrary = {
-                navigator.push(LibraryScreen, saveInBackStack = false)
+            navigateToHome = {
+                navigator.push(ServerBooksScreen, saveInBackStack = false)
             },
             navigateToBrowseSettings = {
                 navigator.push(BrowseSettingsScreen)

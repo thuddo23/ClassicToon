@@ -35,7 +35,7 @@ fun BrowseAddDialog(
     dismissAddDialog: (BrowseEvent.OnDismissAddDialog) -> Unit,
     actionAddDialog: (BrowseEvent.OnActionAddDialog) -> Unit,
     selectAddDialog: (BrowseEvent.OnSelectAddDialog) -> Unit,
-    navigateToLibrary: () -> Unit
+    navigateToHome: () -> Unit
 ) {
     val context = LocalContext.current
     Dialog(
@@ -48,7 +48,7 @@ fun BrowseAddDialog(
             actionAddDialog(
                 BrowseEvent.OnActionAddDialog(
                     context = context,
-                    navigateToLibrary = navigateToLibrary
+                    navigateToHome = navigateToHome
                 )
             )
         },

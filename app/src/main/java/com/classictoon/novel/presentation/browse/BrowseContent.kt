@@ -61,7 +61,7 @@ fun BrowseContent(
     actionAddDialog: (BrowseEvent.OnActionAddDialog) -> Unit,
     selectAddDialog: (BrowseEvent.OnSelectAddDialog) -> Unit,
     changePinnedPaths: (MainEvent.OnChangeBrowsePinnedPaths) -> Unit,
-    navigateToLibrary: () -> Unit,
+    navigateToHome: () -> Unit,
     navigateToBrowseSettings: () -> Unit,
 ) {
     BrowseDialog(
@@ -71,7 +71,7 @@ fun BrowseContent(
         dismissAddDialog = dismissAddDialog,
         selectedBooksAddDialog = selectedBooksAddDialog,
         selectAddDialog = selectAddDialog,
-        navigateToLibrary = navigateToLibrary
+        navigateToHome = navigateToHome
     )
 
     BrowseBottomSheet(
@@ -118,6 +118,6 @@ fun BrowseContent(
         showSearch = showSearch,
         searchVisibility = searchVisibility,
         clearSelectedFiles = clearSelectedFiles,
-        navigateToLibrary = navigateToLibrary
+        navigateToHome = navigateToHome
     )
 }

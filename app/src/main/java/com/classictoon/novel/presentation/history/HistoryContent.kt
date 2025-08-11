@@ -39,7 +39,7 @@ fun HistoryContent(
     showDeleteWholeHistoryDialog: (HistoryEvent.OnShowDeleteWholeHistoryDialog) -> Unit,
     actionDeleteWholeHistoryDialog: (HistoryEvent.OnActionDeleteWholeHistoryDialog) -> Unit,
     dismissDialog: (HistoryEvent.OnDismissDialog) -> Unit,
-    navigateToLibrary: () -> Unit,
+    navigateToHome: () -> Unit,
     navigateToBookInfo: (Int) -> Unit,
     navigateToReader: (Int) -> Unit
 ) {
@@ -74,6 +74,6 @@ fun HistoryContent(
     HistoryBackHandler(
         showSearch = showSearch,
         searchVisibility = searchVisibility,
-        navigateToLibrary = navigateToLibrary
+        navigateToHome = navigateToHome
     )
 }

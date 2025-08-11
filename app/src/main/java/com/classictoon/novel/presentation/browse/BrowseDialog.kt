@@ -20,7 +20,7 @@ fun BrowseDialog(
     dismissAddDialog: (BrowseEvent.OnDismissAddDialog) -> Unit,
     actionAddDialog: (BrowseEvent.OnActionAddDialog) -> Unit,
     selectAddDialog: (BrowseEvent.OnSelectAddDialog) -> Unit,
-    navigateToLibrary: () -> Unit
+    navigateToHome: () -> Unit
 ) {
     when (dialog) {
         BrowseScreen.ADD_DIALOG -> {
@@ -30,7 +30,7 @@ fun BrowseDialog(
                 dismissAddDialog = dismissAddDialog,
                 actionAddDialog = actionAddDialog,
                 selectAddDialog = selectAddDialog,
-                navigateToLibrary = navigateToLibrary
+                navigateToHome = navigateToHome
             )
         }
     }

@@ -26,7 +26,7 @@ import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.history.HistoryContent
 import com.classictoon.novel.presentation.navigator.LocalNavigator
 import com.classictoon.novel.ui.book_info.BookInfoScreen
-import com.classictoon.novel.ui.library.LibraryScreen
+import com.classictoon.novel.presentation.server_books.ServerBooksScreen
 import com.classictoon.novel.ui.reader.ReaderScreen
 
 @Parcelize
@@ -100,8 +100,8 @@ object HistoryScreen : Screen, Parcelable {
             showDeleteWholeHistoryDialog = screenModel::onEvent,
             actionDeleteWholeHistoryDialog = screenModel::onEvent,
             dismissDialog = screenModel::onEvent,
-            navigateToLibrary = {
-                navigator.push(LibraryScreen, saveInBackStack = false)
+            navigateToHome = {
+                navigator.push(ServerBooksScreen, saveInBackStack = false)
             },
             navigateToBookInfo = {
                 navigator.push(BookInfoScreen(bookId = it))

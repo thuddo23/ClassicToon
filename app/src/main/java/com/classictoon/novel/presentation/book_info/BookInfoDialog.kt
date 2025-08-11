@@ -24,7 +24,7 @@ fun BookInfoDialog(
     actionMoveDialog: (BookInfoEvent.OnActionMoveDialog) -> Unit,
     dismissDialog: (BookInfoEvent.OnDismissDialog) -> Unit,
     navigateBack: () -> Unit,
-    navigateToLibrary: () -> Unit
+    navigateToHome: () -> Unit
 ) {
     when (dialog) {
         BookInfoScreen.DELETE_DIALOG -> {
@@ -40,7 +40,7 @@ fun BookInfoDialog(
                 book = book,
                 actionMoveDialog = actionMoveDialog,
                 dismissDialog = dismissDialog,
-                navigateToLibrary = navigateToLibrary
+                navigateToHome = navigateToHome
             )
         }
 

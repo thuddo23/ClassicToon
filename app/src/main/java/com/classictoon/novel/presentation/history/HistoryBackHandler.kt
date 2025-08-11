@@ -14,7 +14,7 @@ import com.classictoon.novel.ui.history.HistoryEvent
 fun HistoryBackHandler(
     showSearch: Boolean,
     searchVisibility: (HistoryEvent.OnSearchVisibility) -> Unit,
-    navigateToLibrary: () -> Unit
+    navigateToHome: () -> Unit
 ) {
     BackHandler {
         if (showSearch) {
@@ -22,6 +22,6 @@ fun HistoryBackHandler(
             return@BackHandler
         }
 
-        navigateToLibrary()
+        navigateToHome()
     }
 }

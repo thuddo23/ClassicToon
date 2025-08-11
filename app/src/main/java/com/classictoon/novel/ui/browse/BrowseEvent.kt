@@ -59,7 +59,7 @@ sealed class BrowseEvent {
 
     data class OnActionAddDialog(
         val context: Context,
-        val navigateToLibrary: () -> Unit
+        val navigateToHome: () -> Unit
     ) : BrowseEvent()
 
     data object OnDismissDialog : BrowseEvent()

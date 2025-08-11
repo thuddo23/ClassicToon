@@ -340,7 +340,7 @@ class BrowseModel @Inject constructor(
                     LibraryScreen.refreshListChannel.trySend(0)
                     LibraryScreen.scrollToPageCompositionChannel.trySend(0)
 
-                    event.navigateToLibrary()
+                    event.navigateToHome()
                     withContext(Dispatchers.Main) {
                         event.context
                             .getString(R.string.books_added)
