@@ -31,7 +31,7 @@ import com.classictoon.novel.presentation.core.components.navigation_rail.Naviga
 import com.classictoon.novel.presentation.main.MainActivityKeyboardManager
 import com.classictoon.novel.presentation.navigator.Navigator
 import com.classictoon.novel.presentation.navigator.NavigatorTabs
-import com.classictoon.novel.presentation.home.HomeScreen
+import com.classictoon.novel.ui.home.HomeScreen
 import com.classictoon.novel.ui.browse.BrowseModel
 import com.classictoon.novel.ui.browse.BrowseScreen
 import com.classictoon.novel.ui.history.HistoryModel

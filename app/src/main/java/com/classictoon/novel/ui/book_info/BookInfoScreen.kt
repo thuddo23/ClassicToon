@@ -23,7 +23,7 @@ import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.book_info.BookInfoContent
 import com.classictoon.novel.presentation.navigator.LocalNavigator
 import com.classictoon.novel.ui.history.HistoryScreen
-import com.classictoon.novel.presentation.home.HomeScreen
+import com.classictoon.novel.ui.home.HomeScreen
 import com.classictoon.novel.ui.reader.ReaderScreen
 
 @Parcelize

@@ -39,7 +39,7 @@ import kotlinx.parcelize.Parcelize
 import com.classictoon.novel.R
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.navigator.LocalNavigator
-import com.classictoon.novel.presentation.home.HomeScreen
+import com.classictoon.novel.ui.home.HomeScreen
 import com.classictoon.novel.ui.main.MainModel
 import com.classictoon.novel.ui.start.StartScreen
 

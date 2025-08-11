@@ -4,9 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-package com.classictoon.novel.presentation.home
+package com.classictoon.novel.ui.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.classictoon.novel.domain.library.book.Book

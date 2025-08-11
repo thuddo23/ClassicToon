@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-package com.classictoon.novel.presentation.home
+package com.classictoon.novel.ui.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
