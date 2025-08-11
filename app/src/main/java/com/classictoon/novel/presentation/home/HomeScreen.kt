@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-package com.classictoon.novel.presentation.server_books
+package com.classictoon.novel.presentation.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -25,13 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.classictoon.novel.data.local.dto.BookEntity
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.navigator.LocalNavigator
 import com.classictoon.novel.presentation.server_book_detail.ServerBookDetailScreen
 
-object ServerBooksScreen : Screen {
+object HomeScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current
@@ -48,7 +47,7 @@ object ServerBooksScreen : Screen {
 fun ServerBooksScreenContent(
     onBookClick: (String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: ServerBooksViewModel = hiltViewModel()
+    viewModel: HomeModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val gridState = rememberLazyGridState()

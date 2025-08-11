@@ -4,11 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-package com.classictoon.novel.presentation.server_books
+package com.classictoon.novel.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.classictoon.novel.data.local.dto.BookEntity
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.use_case.GetServerBooksUseCase
 import com.classictoon.novel.domain.use_case.GetServerBookByIdUseCase
@@ -21,7 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ServerBooksViewModel @Inject constructor(
+class HomeModel @Inject constructor(
     private val getServerBooksUseCase: GetServerBooksUseCase,
     private val getServerBookByIdUseCase: GetServerBookByIdUseCase,
     private val getServerBookContentUseCase: GetServerBookContentUseCase

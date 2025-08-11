@@ -31,13 +31,12 @@ import com.classictoon.novel.presentation.core.components.navigation_rail.Naviga
 import com.classictoon.novel.presentation.main.MainActivityKeyboardManager
 import com.classictoon.novel.presentation.navigator.Navigator
 import com.classictoon.novel.presentation.navigator.NavigatorTabs
-import com.classictoon.novel.presentation.server_books.ServerBooksScreen
+import com.classictoon.novel.presentation.home.HomeScreen
 import com.classictoon.novel.ui.browse.BrowseModel
 import com.classictoon.novel.ui.browse.BrowseScreen
 import com.classictoon.novel.ui.history.HistoryModel
 import com.classictoon.novel.ui.history.HistoryScreen
 import com.classictoon.novel.ui.library.LibraryModel
-import com.classictoon.novel.ui.library.LibraryScreen
 import com.classictoon.novel.ui.settings.SettingsModel
 import com.classictoon.novel.ui.start.StartScreen
 import com.classictoon.novel.ui.theme.BookStoryTheme
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     private val mainModel: MainModel by viewModels()
     private val settingsModel: SettingsModel by viewModels()
 
-    private var tabScreens = listOf(ServerBooksScreen, HistoryScreen, BrowseScreen)
+    private var tabScreens = listOf(HomeScreen, HistoryScreen, BrowseScreen)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Splash screen
@@ -93,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
             val tabs = listOf(
                 NavigatorItem(
-                    screen = ServerBooksScreen,
+                    screen = HomeScreen,
                     title = R.string.home_screen,
                     tooltip = R.string.home_content_desc,
                     selectedIcon = R.drawable.home_screen_filled,

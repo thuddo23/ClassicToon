@@ -39,7 +39,7 @@ import kotlinx.parcelize.Parcelize
 import com.classictoon.novel.R
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.navigator.LocalNavigator
-import com.classictoon.novel.presentation.server_books.ServerBooksScreen
+import com.classictoon.novel.presentation.home.HomeScreen
 import com.classictoon.novel.ui.main.MainModel
 import com.classictoon.novel.ui.start.StartScreen
 
@@ -60,7 +60,7 @@ object SplashScreen : Screen, Parcelable {
                 val targetScreen = if (mainState.value.showStartScreen) {
                     StartScreen
                 } else {
-                    ServerBooksScreen
+                    HomeScreen
                 }
                 navigator.push(targetScreen, saveInBackStack = false)
             }

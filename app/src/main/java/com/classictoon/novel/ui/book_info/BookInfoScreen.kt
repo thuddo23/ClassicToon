@@ -23,7 +23,7 @@ import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.book_info.BookInfoContent
 import com.classictoon.novel.presentation.navigator.LocalNavigator
 import com.classictoon.novel.ui.history.HistoryScreen
-import com.classictoon.novel.presentation.server_books.ServerBooksScreen
+import com.classictoon.novel.presentation.home.HomeScreen
 import com.classictoon.novel.ui.reader.ReaderScreen
 
 @Parcelize
@@ -104,7 +104,7 @@ data class BookInfoScreen(val bookId: Int) : Screen, Parcelable {
                 },
                 navigateToHome = {
                     navigator.push(
-                        ServerBooksScreen,
+                        HomeScreen,
                         popping = true,
                         saveInBackStack = false
                     )
