@@ -21,7 +21,6 @@ import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.immutableListOf
 import com.classictoon.novel.R
 import com.classictoon.novel.domain.navigator.NavigatorItem
 import com.classictoon.novel.domain.navigator.StackEvent
@@ -89,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             val state = mainModel.state.collectAsStateWithLifecycle()
             val isLoaded = mainModel.isReady.collectAsStateWithLifecycle()
 
-            val tabs = immutableListOf(
+            val tabs = listOf(
                 NavigatorItem(
                     screen = LibraryScreen,
                     title = R.string.library_screen,

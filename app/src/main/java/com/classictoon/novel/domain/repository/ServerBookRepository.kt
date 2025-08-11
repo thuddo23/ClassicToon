@@ -7,6 +7,7 @@
 package com.classictoon.novel.domain.repository
 
 import com.classictoon.novel.data.local.dto.BookEntity
+import com.classictoon.novel.domain.library.book.Book
 
 interface ServerBookRepository {
     
@@ -15,11 +16,11 @@ interface ServerBookRepository {
         limit: Int = 20,
         searchQuery: String? = null,
         genre: String? = null
-    ): List<BookEntity>
+    ): List<Book>
     
     suspend fun getBookById(
         bookId: String
-    ): BookEntity?
+    ): Book?
     
     suspend fun getBookContent(
         bookId: String
@@ -29,11 +30,11 @@ interface ServerBookRepository {
         query: String,
         page: Int = 1,
         limit: Int = 20
-    ): List<BookEntity>
+    ): List<Book>
     
     suspend fun getBooksByGenre(
         genre: String,
         page: Int = 1,
         limit: Int = 20
-    ): List<BookEntity>
+    ): List<Book>
 }

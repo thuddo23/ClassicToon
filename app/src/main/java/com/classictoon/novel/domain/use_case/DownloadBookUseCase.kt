@@ -6,8 +6,10 @@
 
 package com.classictoon.novel.domain.use_case
 
-import android.content.Context
-import com.classictoon.novel.data.local.dto.BookEntity
+import android.app.Application
+import android.graphics.Bitmap
+import com.classictoon.novel.domain.library.book.Book
+import com.classictoon.novel.domain.library.book.BookWithCover
 import com.classictoon.novel.domain.repository.BookRepository
 import com.classictoon.novel.domain.repository.ServerBookRepository
 import java.io.File
@@ -18,10 +20,10 @@ import javax.inject.Inject
 class DownloadBookUseCase @Inject constructor(
     private val serverBookRepository: ServerBookRepository,
     private val bookRepository: BookRepository,
-    private val context: Context
+    private val context: Application,
 ) {
     
-    suspend fun execute(bookId: String): Result<BookEntity> {
+    suspend fun execute(bookId: String): Result<Book> {
         return try {
             // Get book details and content from server
             val serverBook = serverBookRepository.getBookById(bookId)
@@ -38,7 +40,13 @@ class DownloadBookUseCase @Inject constructor(
             )
             
             // Save book to local database
-            bookRepository.insertBook(updatedBookEntity)
+            // TODO update here
+            bookRepository.insertBook(
+                BookWithCover(
+                    book = updatedBookEntity,
+                    coverImage = Bitmap.createBitmap(100, 100, Bitmap.Config.RGB_565)
+                    )
+            )
             
             Result.success(updatedBookEntity)
         } catch (e: Exception) {

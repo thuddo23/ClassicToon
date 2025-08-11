@@ -9,6 +9,7 @@ package com.classictoon.novel.presentation.server_books
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.classictoon.novel.data.local.dto.BookEntity
+import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.use_case.GetServerBooksUseCase
 import com.classictoon.novel.domain.use_case.GetServerBookByIdUseCase
 import com.classictoon.novel.domain.use_case.GetServerBookContentUseCase
@@ -74,7 +75,7 @@ class ServerBooksViewModel @Inject constructor(
         loadBooks(nextPage)
     }
     
-    fun getBookById(bookId: String, onSuccess: (BookEntity) -> Unit) {
+    fun getBookById(bookId: String, onSuccess: (Book) -> Unit) {
         viewModelScope.launch {
             try {
                 val book = getServerBookByIdUseCase(bookId)
@@ -106,7 +107,7 @@ class ServerBooksViewModel @Inject constructor(
 }
 
 data class ServerBooksUiState(
-    val books: List<BookEntity> = emptyList(),
+    val books: List<Book> = emptyList(),
     val isLoading: Boolean = false,
     val error: String? = null,
     val currentPage: Int = 1,

@@ -9,7 +9,9 @@ package com.classictoon.novel.data.mapper.book
 import androidx.core.net.toUri
 import com.classictoon.novel.R
 import com.classictoon.novel.data.local.dto.BookEntity
+import com.classictoon.novel.data.remote.dto.RemoteBookResponse
 import com.classictoon.novel.domain.library.book.Book
+import com.classictoon.novel.domain.library.category.Category
 import com.classictoon.novel.domain.ui.UIText
 import javax.inject.Inject
 
@@ -26,7 +28,6 @@ class BookMapperImpl @Inject constructor() : BookMapper {
             description = book.description,
             image = book.coverImage?.toString(),
             category = book.category,
-            remoteBookId = null // Local books don't have remote ID
         )
     }
 
@@ -45,6 +46,22 @@ class BookMapperImpl @Inject constructor() : BookMapper {
             lastOpened = null,
             category = bookEntity.category,
             coverImage = bookEntity.image?.toUri()
+        )
+    }
+
+    override suspend fun toBook(remoteBookResponse: RemoteBookResponse): Book {
+        return Book(
+            id = 0,
+            title = remoteBookResponse.title,
+            author = remoteBookResponse.author.let { UIText.StringValue(it) },
+            description = remoteBookResponse.description,
+            scrollIndex = 0,
+            scrollOffset = 0,
+            progress = 0f,
+            filePath = "",
+            lastOpened = null,
+            category = Category.PLANNING,
+            coverImage = remoteBookResponse.cover.toUri(),
         )
     }
 }

@@ -9,6 +9,7 @@ package com.classictoon.novel.presentation.server_book_detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.classictoon.novel.data.local.dto.BookEntity
+import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.library.book.BookWithCover
 import com.classictoon.novel.domain.use_case.GetServerBookByIdUseCase
 import com.classictoon.novel.domain.use_case.GetServerBookContentUseCase
@@ -105,10 +106,10 @@ class ServerBookDetailViewModel @Inject constructor(
 }
 
 data class ServerBookDetailUiState(
-    val book: BookWithCover? = null,
+    val book: Book? = null,
     val isLoading: Boolean = false,
     val error: String? = null,
     val isDownloading: Boolean = false,
     val downloadSuccess: Boolean = false,
-    val downloadedBook: BookEntity? = null
+    val downloadedBook: Book? = null
 )

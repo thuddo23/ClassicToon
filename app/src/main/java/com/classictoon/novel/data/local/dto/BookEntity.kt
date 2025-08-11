@@ -22,5 +22,4 @@ data class BookEntity(
     val progress: Float,
     val image: String? = null,
     val category: Category,
-    val remoteBookId: String? = null
 )

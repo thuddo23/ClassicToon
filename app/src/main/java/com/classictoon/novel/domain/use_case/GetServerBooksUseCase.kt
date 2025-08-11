@@ -7,6 +7,7 @@
 package com.classictoon.novel.domain.use_case
 
 import com.classictoon.novel.data.local.dto.BookEntity
+import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.repository.ServerBookRepository
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class GetServerBooksUseCase @Inject constructor(
         limit: Int = 20,
         searchQuery: String? = null,
         genre: String? = null
-    ): List<BookEntity> {
+    ): List<Book> {
         return repository.getBooks(page, limit, searchQuery, genre)
     }
 }

@@ -26,6 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.classictoon.novel.data.local.dto.BookEntity
+import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.navigator.LocalNavigator
 import com.classictoon.novel.presentation.server_book_detail.ServerBookDetailScreen
@@ -105,7 +106,7 @@ fun ServerBooksScreenContent(
                     items(uiState.books) { book ->
                         ServerBookCard(
                             book = book,
-                            onClick = { onBookClick(book.remoteBookId ?: book.id.toString()) }
+                            onClick = { onBookClick(book.id.toString()) }
                         )
                     }
                     
@@ -145,7 +146,7 @@ private fun SearchBar(
 
 @Composable
 private fun ServerBookCard(
-    book: BookEntity,
+    book: Book,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -159,7 +160,7 @@ private fun ServerBookCard(
             // Cover image
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(book.cover)
+                    .data(book.coverImage)
                     .crossfade(true)
                     .build(),
                 contentDescription = "Cover of ${book.title}",
@@ -183,7 +184,7 @@ private fun ServerBookCard(
                 Spacer(modifier = Modifier.height(4.dp))
                 
                 Text(
-                    text = book.author ?: "Unknown Author",
+                    text = book.author.asString(),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,

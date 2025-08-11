@@ -13,8 +13,9 @@ data class RemoteBookResponse(
     val bookId: String,
     val title: String,
     val author: String,
+    val description: String,
     @SerializedName("people_read")
     val peopleRead: Int,
-    val cover: String?,
+    val cover: String,
     val category: String
 )

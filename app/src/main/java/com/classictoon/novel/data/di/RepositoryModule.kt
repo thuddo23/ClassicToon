@@ -31,12 +31,14 @@ import com.classictoon.novel.data.repository.DebugBookRepositoryImpl
 import com.classictoon.novel.data.repository.FileSystemRepositoryImpl
 import com.classictoon.novel.data.repository.HistoryRepositoryImpl
 import com.classictoon.novel.data.repository.PermissionRepositoryImpl
+import com.classictoon.novel.data.repository.ServerBookRepositoryImpl
 import com.classictoon.novel.domain.repository.BookRepository
 import com.classictoon.novel.domain.repository.ColorPresetRepository
 import com.classictoon.novel.domain.repository.DataStoreRepository
 import com.classictoon.novel.domain.repository.FileSystemRepository
 import com.classictoon.novel.domain.repository.HistoryRepository
 import com.classictoon.novel.domain.repository.PermissionRepository
+import com.classictoon.novel.domain.repository.ServerBookRepository
 import javax.inject.Singleton
 
 @Module
@@ -55,13 +57,20 @@ abstract class RepositoryModule {
             bookRepositoryImpl: BookRepositoryImpl,
             debugBookRepositoryImpl: DebugBookRepositoryImpl
         ): BookRepository {
-            return if (BuildConfig.DEBUG) {
+            /*return if (BuildConfig.DEBUG) {
                 debugBookRepositoryImpl
             } else {
                 bookRepositoryImpl
-            }
+            }*/
+            return bookRepositoryImpl
         }
     }
+
+    @Binds
+    @Singleton
+    abstract fun bindServerBookRepository(
+        serverBookRepositoryImpl: ServerBookRepositoryImpl
+    ): ServerBookRepository
 
     @Binds
     @Singleton

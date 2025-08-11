@@ -113,6 +113,7 @@ class MockApiService @Inject constructor() {
                 bookId = "book_$index",
                 title = "The Amazing Story of Book $index",
                 author = authors[index % authors.size],
+                description = "This is the description for this book which index is $index\nBest seller 2025",
                 peopleRead = 1000 + (index * 100) % 10000,
                 cover = "https://picsum.photos/300/400?random=$index",
                 category = categories[index % categories.size]
