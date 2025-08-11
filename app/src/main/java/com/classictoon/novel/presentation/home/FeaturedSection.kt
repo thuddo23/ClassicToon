@@ -1,4 +1,4 @@
-package com.classictoon.novel.presentation.home.components
+package com.classictoon.novel.presentation.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -67,7 +70,7 @@ fun FeaturedSection() {
             text = "What's everyone reading",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = androidx.compose.ui.graphics.Color.Black,
+            color = Color.Black,
             modifier = Modifier
                 .padding(bottom = 16.dp)
                 .padding(horizontal = 16.dp)
@@ -131,32 +134,32 @@ private fun FeaturedCard(
             }
             .fillMaxWidth()
             .fillMaxHeight(),
-        shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(androidx.compose.ui.graphics.Color(0xFF7C3AED))
+                .background(Color(0xFF7C3AED))
         ) {
             // Placeholder for image - you can replace with actual AsyncImage
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(androidx.compose.ui.graphics.Color(0xFF7C3AED))
+                    .background(Color(0xFF7C3AED))
             )
             
             // Content overlay
             Column(
                 modifier = Modifier
-                    .align(androidx.compose.ui.Alignment.BottomStart)
+                    .align(Alignment.BottomStart)
                     .padding(16.dp)
             ) {
                 Text(
                     text = book.title,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.ExtraBold,
-                    color = androidx.compose.ui.graphics.Color.White
+                    color = Color.White
                 )
                 
                 if (book.isNewUpdate) {
@@ -164,7 +167,7 @@ private fun FeaturedCard(
                         text = "New Update",
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
-                        color = androidx.compose.ui.graphics.Color(0xFF22FF00),
+                        color = Color(0xFF22FF00),
                         modifier = Modifier.padding(top = 4.dp)
                     )
                 } else {
@@ -172,7 +175,7 @@ private fun FeaturedCard(
                         text = "2 new chapter",
                         fontSize = 9.sp,
                         fontWeight = FontWeight.Bold,
-                        color = androidx.compose.ui.graphics.Color(0xFF22FF00),
+                        color = Color(0xFF22FF00),
                         modifier = Modifier.padding(top = 4.dp)
                     )
                 }
@@ -186,14 +189,14 @@ private fun FeaturedCard(
                         Box(
                             modifier = Modifier
                                 .clip(androidx.compose.foundation.shape.RoundedCornerShape(10.dp))
-                                .background(androidx.compose.ui.graphics.Color(0x2AD9D9D9))
+                                .background(Color(0x2AD9D9D9))
                                 .padding(horizontal = 8.dp, vertical = 4.dp)
                         ) {
                             Text(
                                 text = tag,
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Medium,
-                                color = androidx.compose.ui.graphics.Color(0xB3FFFFFF)
+                                color = Color(0xB3FFFFFF)
                             )
                         }
                     }

@@ -1,4 +1,4 @@
-package com.classictoon.novel.presentation.home.components
+package com.classictoon.novel.presentation.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
