@@ -31,6 +31,7 @@ import com.classictoon.novel.presentation.core.components.navigation_rail.Naviga
 import com.classictoon.novel.presentation.main.MainActivityKeyboardManager
 import com.classictoon.novel.presentation.navigator.Navigator
 import com.classictoon.novel.presentation.navigator.NavigatorTabs
+import com.classictoon.novel.presentation.server_books.ServerBooksScreen
 import com.classictoon.novel.ui.browse.BrowseModel
 import com.classictoon.novel.ui.browse.BrowseScreen
 import com.classictoon.novel.ui.history.HistoryModel
@@ -90,25 +91,25 @@ class MainActivity : AppCompatActivity() {
 
             val tabs = listOf(
                 NavigatorItem(
-                    screen = LibraryScreen,
-                    title = R.string.library_screen,
-                    tooltip = R.string.library_content_desc,
-                    selectedIcon = R.drawable.library_screen_filled,
-                    unselectedIcon = R.drawable.library_screen_outlined
+                    screen = ServerBooksScreen,
+                    title = R.string.home_screen,
+                    tooltip = R.string.home_content_desc,
+                    selectedIcon = R.drawable.home_screen_filled,
+                    unselectedIcon = R.drawable.home_screen_outlined
                 ),
                 NavigatorItem(
                     screen = HistoryScreen,
-                    title = R.string.history_screen,
-                    tooltip = R.string.history_content_desc,
-                    selectedIcon = R.drawable.history_screen_filled,
-                    unselectedIcon = R.drawable.history_screen_outlined
+                    title = R.string.explore_screen,
+                    tooltip = R.string.explore_content_desc,
+                    selectedIcon = R.drawable.explore_screen_filled,
+                    unselectedIcon = R.drawable.explore_screen_outlined
                 ),
                 NavigatorItem(
                     screen = BrowseScreen,
-                    title = R.string.browse_screen,
-                    tooltip = R.string.browse_content_desc,
-                    selectedIcon = R.drawable.browse_screen_filled,
-                    unselectedIcon = R.drawable.browse_screen_outlined
+                    title = R.string.mine_screen,
+                    tooltip = R.string.mine_content_desc,
+                    selectedIcon = R.drawable.mine_screen_filled,
+                    unselectedIcon = R.drawable.mine_screen_outlined
                 )
             )
 
