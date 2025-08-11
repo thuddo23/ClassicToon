@@ -6,6 +6,7 @@
 
 package com.classictoon.novel.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.classictoon.novel.domain.library.book.Book
@@ -42,9 +43,9 @@ class HomeModel @Inject constructor(
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             
             try {
-                val books = getServerBooksUseCase(page, 20, searchQuery, genre)
+                val books = getServerBooksUseCase(page, 100, searchQuery, genre)
                 _uiState.value = _uiState.value.copy(
-                    books = books,
+                    books = _uiState.value.books + books,
                     isLoading = false,
                     currentPage = page
                 )
@@ -68,13 +69,13 @@ class HomeModel @Inject constructor(
     fun filterByGenre(genre: String?) {
         loadBooks(genre = genre)
     }
-    
+
     fun loadMoreBooks() {
         val nextPage = _uiState.value.currentPage + 1
         loadBooks(nextPage)
     }
     
-    fun getBookById(bookId: String, onSuccess: (Book) -> Unit) {
+    fun getBookById(bookId: Int, onSuccess: (Book) -> Unit) {
         viewModelScope.launch {
             try {
                 val book = getServerBookByIdUseCase(bookId)
@@ -87,7 +88,7 @@ class HomeModel @Inject constructor(
         }
     }
     
-    fun getBookContent(bookId: String, onSuccess: (String) -> Unit) {
+    fun getBookContent(bookId: Int, onSuccess: (String) -> Unit) {
         viewModelScope.launch {
             try {
                 val content = getServerBookContentUseCase(bookId)

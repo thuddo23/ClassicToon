@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RemoteBookResponse(
     @SerializedName("book_id")
-    val bookId: String,
+    val bookId: Int,
     val title: String,
     val author: String,
     val description: String,

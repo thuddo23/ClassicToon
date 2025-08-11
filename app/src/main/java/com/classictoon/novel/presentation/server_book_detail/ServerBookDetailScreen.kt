@@ -53,7 +53,7 @@ import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.navigator.LocalNavigator
 
-class ServerBookDetailScreen(private val bookId: String) : Screen {
+class ServerBookDetailScreen(private val bookId: Int) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current
@@ -71,7 +71,7 @@ class ServerBookDetailScreen(private val bookId: String) : Screen {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ServerBookDetailScreenContent(
-    bookId: String,
+    bookId: Int,
     onBackClick: () -> Unit,
     onReadBook: (String) -> Unit,
     viewModel: ServerBookDetailViewModel = hiltViewModel()
@@ -149,7 +149,7 @@ fun ServerBookDetailScreenContent(
 private fun BookDetailContent(
     book: Book,
     onReadBook: (String) -> Unit,
-    onDownloadBook: (String) -> Unit,
+    onDownloadBook: (Int) -> Unit,
     isDownloading: Boolean = false,
     modifier: Modifier = Modifier
 ) {
@@ -243,7 +243,7 @@ private fun BookDetailContent(
             
             // Download button
             Button(
-                onClick = { onDownloadBook(book.id.toString()) },
+                onClick = { onDownloadBook(book.id) },
                 enabled = !isDownloading,
                 modifier = Modifier.weight(1f)
             ) {

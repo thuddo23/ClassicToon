@@ -51,7 +51,7 @@ class BookMapperImpl @Inject constructor() : BookMapper {
 
     override suspend fun toBook(remoteBookResponse: RemoteBookResponse): Book {
         return Book(
-            id = 0,
+            id = remoteBookResponse.bookId,
             title = remoteBookResponse.title,
             author = remoteBookResponse.author.let { UIText.StringValue(it) },
             description = remoteBookResponse.description,

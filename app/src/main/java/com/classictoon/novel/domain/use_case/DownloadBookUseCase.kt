@@ -23,7 +23,7 @@ class DownloadBookUseCase @Inject constructor(
     private val context: Application,
 ) {
     
-    suspend fun execute(bookId: String): Result<Book> {
+    suspend fun execute(bookId: Int): Result<Book> {
         return try {
             // Get book details and content from server
             val serverBook = serverBookRepository.getBookById(bookId)

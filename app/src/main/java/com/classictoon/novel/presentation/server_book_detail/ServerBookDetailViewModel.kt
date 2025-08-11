@@ -31,7 +31,7 @@ class ServerBookDetailViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ServerBookDetailUiState())
     val uiState: StateFlow<ServerBookDetailUiState> = _uiState.asStateFlow()
     
-    fun loadBook(bookId: String) {
+    fun loadBook(bookId: Int) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             
@@ -57,7 +57,7 @@ class ServerBookDetailViewModel @Inject constructor(
         }
     }
     
-    fun getBookContent(bookId: String, onSuccess: (String) -> Unit) {
+    fun getBookContent(bookId: Int, onSuccess: (String) -> Unit) {
         viewModelScope.launch {
             try {
                 val content = getServerBookContentUseCase(bookId)
@@ -74,7 +74,7 @@ class ServerBookDetailViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(error = null)
     }
     
-    fun downloadBook(bookId: String) {
+    fun downloadBook(bookId: Int) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isDownloading = true, error = null)
             

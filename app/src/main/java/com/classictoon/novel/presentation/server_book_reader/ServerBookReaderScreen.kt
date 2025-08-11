@@ -20,7 +20,7 @@
 //
 //@Composable
 //fun ServerBookReaderScreen(
-//    bookId: String,
+//    bookId: Int,
 //    onBackClick: () -> Unit,
 //    modifier: Modifier = Modifier,
 //    viewModel: ServerBookReaderViewModel = hiltViewModel()

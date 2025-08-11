@@ -24,7 +24,7 @@ class ServerBookReaderViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ServerBookReaderUiState())
     val uiState: StateFlow<ServerBookReaderUiState> = _uiState.asStateFlow()
     
-    fun loadBookContent(bookId: String) {
+    fun loadBookContent(bookId: Int) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             

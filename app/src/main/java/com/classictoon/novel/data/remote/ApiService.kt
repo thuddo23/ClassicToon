@@ -23,6 +23,6 @@ interface ApiService {
     
     @GET("books/{bookId}/content")
     suspend fun getBookContent(
-        @Path("bookId") bookId: String
+        @Path("bookId") bookId: Int
     ): String
 }

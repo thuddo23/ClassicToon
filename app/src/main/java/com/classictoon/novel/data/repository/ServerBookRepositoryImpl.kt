@@ -35,7 +35,7 @@ class ServerBookRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getBookById(bookId: String): Book? {
+    override suspend fun getBookById(bookId: Int): Book? {
         return try {
             // Note: Real API doesn't have getBookById endpoint, so we'll use mock for now
             // In a real implementation, you might want to add this endpoint or fetch from the books list
@@ -45,7 +45,7 @@ class ServerBookRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getBookContent(bookId: String): String {
+    override suspend fun getBookContent(bookId: Int): String {
         return try {
             apiService.getBookContent(bookId)
         } catch (e: Exception) {

@@ -19,11 +19,11 @@ interface ServerBookRepository {
     ): List<Book>
     
     suspend fun getBookById(
-        bookId: String
+        bookId: Int
     ): Book?
     
     suspend fun getBookContent(
-        bookId: String
+        bookId: Int
     ): String // Returns HTML content
     
     suspend fun searchBooks(

@@ -46,12 +46,12 @@ class MockApiService @Inject constructor() {
         }
     }
     
-    suspend fun getBookById(bookId: String): RemoteBookResponse? {
+    suspend fun getBookById(bookId: Int): RemoteBookResponse? {
         delay(300)
         return mockBooks.find { it.bookId == bookId }
     }
     
-    suspend fun getBookContent(bookId: String): String {
+    suspend fun getBookContent(bookId: Int): String {
         delay(400)
         // Return mock HTML content based on book ID
         return """
@@ -108,9 +108,9 @@ class MockApiService @Inject constructor() {
             "Suzanne Collins", "Veronica Roth", "Stephanie Meyer", "E.L. James", "Gillian Flynn"
         )
         
-        return (1..50).map { index ->
+        return (0 until 50).map { index ->
             RemoteBookResponse(
-                bookId = "book_$index",
+                bookId = index,
                 title = "The Amazing Story of Book $index",
                 author = authors[index % authors.size],
                 description = "This is the description for this book which index is $index\nBest seller 2025",

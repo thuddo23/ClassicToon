@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -45,7 +46,7 @@ object HomeScreen : Screen {
 
 @Composable
 fun HomeScreenContent(
-    onBookClick: (String) -> Unit,
+    onBookClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeModel = hiltViewModel()
 ) {
@@ -53,7 +54,7 @@ fun HomeScreenContent(
     val gridState = rememberLazyGridState()
     var searchQuery by remember { mutableStateOf("") }
     
-    LaunchedEffect(gridState) {
+    /*LaunchedEffect(gridState) {
         snapshotFlow { gridState.layoutInfo.visibleItemsInfo }
             .collect { visibleItems ->
                 if (visibleItems.isNotEmpty() && 
@@ -61,7 +62,7 @@ fun HomeScreenContent(
                     viewModel.loadMoreBooks()
                 }
             }
-    }
+    }*/
     
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -110,10 +111,10 @@ fun HomeScreenContent(
                         state = gridState,
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        items(uiState.books) { book ->
+                        itemsIndexed(uiState.books, key = { _, book -> book.id }) { _, book ->
                             ServerBookCard(
                                 book = book,
-                                onClick = { onBookClick(book.id.toString()) }
+                                onClick = { onBookClick(book.id) }
                             )
                         }
                         

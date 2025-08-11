@@ -15,7 +15,7 @@ class GetServerBookByIdUseCase @Inject constructor(
     private val repository: ServerBookRepository
 ) {
     
-    suspend operator fun invoke(bookId: String): Book? {
+    suspend operator fun invoke(bookId: Int): Book? {
         return repository.getBookById(bookId)
     }
 }
