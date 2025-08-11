@@ -60,7 +60,7 @@ class BookMapperImpl @Inject constructor() : BookMapper {
             progress = 0f,
             filePath = "",
             lastOpened = null,
-            category = Category.PLANNING,
+            category = Category.OTHER,
             coverImage = remoteBookResponse.cover.toUri(),
         )
     }

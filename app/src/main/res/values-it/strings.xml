@@ -180,7 +180,11 @@
     <string name="press_again_toast">Premere di nuovo Indietro per uscire</string>
     <string name="file_size">Dimensione</string>
     <string name="help_desc_how_to_add_books_2">Sfoglia</string>
-    <string name="already_read_tab">Già letto</string>
+    <string name="already_read_tab">Romantico</string>
+    <string name="comedy_tab">Commedia</string>
+    <string name="drama_tab">Dramma</string>
+    <string name="mystery_tab">Mistero</string>
+    <string name="science_fiction_tab">Fantascienza</string>
     <string name="checkbox_content_desc">Casella di controllo</string>
     <string name="help_title_how_to_create_color_presets">Come posso creare e modificare le preimpostazioni di colore?</string>
     <string name="slava_ukraini">Slava Ukraini!</string>
@@ -205,7 +209,7 @@
     <string name="select_all_files_content_desc">Seleziona tutti i file</string>
     <string name="help_desc_how_to_customize_app_2">Impostazioni</string>
     <string name="delete_history_element_content_desc">Elimina cronologia elemento</string>
-    <string name="reading_tab">Lettura</string>
+    <string name="reading_tab">Fantasy</string>
     <string name="help_title_how_to_read_book">Come si legge un libro?</string>
     <string name="clear_selected_items_content_desc">Cancella gli elementi selezionati</string>
     <string name="revert_content_desc">Ripristina</string>
@@ -228,9 +232,9 @@
     <string name="change_cover">Cambia immagine di copertina</string>
     <string name="shuffle_color_preset_content_desc">Mescola i colori</string>
     <string name="delete_cover_desc">Elimina l\'immagine di copertina corrente del libro</string>
-    <string name="planning_tab">Pianificazione</string>
+    <string name="planning_tab">Azione</string>
     <string name="color_preset_query">Preselezione %1$s</string>
-    <string name="dropped_tab">Abbandonato</string>
+    <string name="dropped_tab">Thriller</string>
     <string name="absolute_dark_option_desc">Cambia il colore dello sfondo in completamente nero</string>
     <string name="vertical_padding_option">Margini verticali</string>
     <string name="start_done">Tutto fatto!</string>

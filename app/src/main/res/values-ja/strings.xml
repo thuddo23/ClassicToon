@@ -45,7 +45,7 @@
     <string name="change_cover">カバー画像を変更する</string>
     <string name="delete_cover">カバー画像を消去する</string>
     <string name="author">著者</string>
-    <string name="planning_tab">計画</string>
+    <string name="planning_tab">アクション</string>
     <string name="general_tab">一般</string>
     <string name="sort_tab">並び替え</string>
     <string name="reader_tab">リーダー</string>
@@ -93,8 +93,12 @@
     <string name="translate">翻訳</string>
     <string name="change_path">パスを変更</string>
     <string name="add_folder">フォルダを追加</string>
-    <string name="reading_tab">閲覧中</string>
-    <string name="already_read_tab">既読</string>
+    <string name="reading_tab">ファンタジー</string>
+    <string name="already_read_tab">ロマンス</string>
+    <string name="comedy_tab">コメディ</string>
+    <string name="drama_tab">ドラマ</string>
+    <string name="mystery_tab">ミステリー</string>
+    <string name="science_fiction_tab">SF</string>
     <string name="color_tab">カラー</string>
     <string name="filter_tab">フィルタ</string>
     <string name="appearance_settings_desc">テーマ、カラー</string>
@@ -299,7 +303,7 @@
     <string name="help_title_how_to_manage_history">履歴はどうやって管理するのですか?</string>
     <string name="help_title_how_to_use_tooltip">ツールチップはどうやって使いますか?</string>
     <string name="help_desc_how_to_create_color_presets_1">外観設定に移動します(参照：リーダーをカスタマイズするにはどうすればいいですか?)。すべてのカラープリセットの設定を変更する場合、「カラー」カテゴリのサブカテゴリである『カラープリセット』の下のボックスを使用します。新しいカラープリセットを作成するには、「追加」アイコンボタンをクリックします。プリセットを変更する場合は複数の方法があります。テキストフィールドをクリックするとカラープリセットの名前を変更でき、スライダーを動かすとプリセットの色を変えることが出来ます。また、「シャッフル」ボタンをクリックするとすべての色をシャッフルすることが出来ます。カラープリセットを削除する場合は「削除」アイコンボタンをクリックします。</string>
-    <string name="dropped_tab">中断</string>
+    <string name="dropped_tab">スリラー</string>
     <string name="display_tab">表示</string>
     <string name="cutout_padding_option">切り抜き余白</string>
     <string name="perception_expander_option">知覚拡張</string>

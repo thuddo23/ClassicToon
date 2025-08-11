@@ -10,8 +10,13 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 enum class Category {
-    READING,
-    ALREADY_READ,
-    PLANNING,
-    DROPPED
+    FANTASY,
+    ROMANCE,
+    ACTION,
+    THRILLER,
+    COMEDY,
+    DRAMA,
+    MYSTERY,
+    SCIENCE_FICTION,
+    OTHER,
 }

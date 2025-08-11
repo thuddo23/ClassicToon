@@ -29,7 +29,7 @@ fun provideEmptyBook() = Book(
     scrollOffset = 0,
     progress = 0f,
     lastOpened = null,
-    category = Category.READING
+    category = Category.FANTASY
 )
 
 // Default Color Preset

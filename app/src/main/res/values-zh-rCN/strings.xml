@@ -46,8 +46,8 @@
     <string name="unknown_author">未知</string>
     <string name="change_cover">修改封面图片</string>
     <string name="delete_cover_desc">删除这本书当前的封面图片</string>
-    <string name="reading_tab">正在阅读</string>
-    <string name="already_read_tab">已阅读</string>
+    <string name="reading_tab">奇幻</string>
+    <string name="already_read_tab">浪漫</string>
     <string name="add_books">添加书籍？</string>
     <string name="error_no_browser">未发现浏览器应用。</string>
     <string name="add_book">添加一本书</string>
@@ -100,7 +100,11 @@
     <string name="sort_browse_settings">排序</string>
     <string name="blue_color">蓝色</string>
     <string name="paragraph_height_option">段落间距</string>
-    <string name="dropped_tab">已放弃</string>
+    <string name="dropped_tab">惊悚</string>
+    <string name="comedy_tab">喜剧</string>
+    <string name="drama_tab">剧情</string>
+    <string name="mystery_tab">悬疑</string>
+    <string name="science_fiction_tab">科幻</string>
     <string name="color_tab">颜色</string>
     <string name="filter_tab">过滤</string>
     <string name="general_settings_desc">应用语言</string>
@@ -123,7 +127,7 @@
     <string name="font_color_option">字体颜色</string>
     <string name="filter_browse_settings">过滤</string>
     <string name="reader_settings">阅读器</string>
-    <string name="planning_tab">计划中</string>
+    <string name="planning_tab">动作</string>
     <string name="font_style_italic">斜体</string>
     <string name="red_color">红色</string>
     <string name="sort_tab">排序</string>

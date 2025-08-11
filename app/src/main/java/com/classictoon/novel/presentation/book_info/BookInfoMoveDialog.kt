@@ -58,10 +58,14 @@ fun BookInfoMoveDialog(
         items = {
             items(categories, key = { it.name }) {
                 val category = when (it) {
-                    Category.READING -> stringResource(id = R.string.reading_tab)
-                    Category.ALREADY_READ -> stringResource(id = R.string.already_read_tab)
-                    Category.PLANNING -> stringResource(id = R.string.planning_tab)
-                    Category.DROPPED -> stringResource(id = R.string.dropped_tab)
+                    Category.FANTASY -> stringResource(id = R.string.reading_tab)
+                    Category.ROMANCE -> stringResource(id = R.string.already_read_tab)
+                    Category.ACTION -> stringResource(id = R.string.planning_tab)
+                    Category.THRILLER -> stringResource(id = R.string.dropped_tab)
+                    Category.COMEDY -> stringResource(id = R.string.comedy_tab)
+                    Category.DRAMA -> stringResource(id = R.string.drama_tab)
+                    Category.MYSTERY -> stringResource(id = R.string.mystery_tab)
+                    Category.SCIENCE_FICTION -> stringResource(id = R.string.science_fiction_tab)
                 }
 
                 SelectableDialogItem(
