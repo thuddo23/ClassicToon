@@ -13,8 +13,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -368,26 +366,61 @@ private fun TopPicksSection() {
             modifier = Modifier.padding(bottom = 16.dp)
         )
         
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.height(564.dp)
+        // Use regular Column and Row instead of LazyVerticalGrid to avoid infinite height constraints
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(9) { index ->
+            // Row 1
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
                 TopPickCard(
-                    title = when (index) {
-                        0 -> "Dragon's Tale"
-                        1 -> "Magic bla"
-                        2 -> "Shadow Quest"
-                        3 -> "The Fool"
-                        4 -> "Explorei"
-                        5 -> "Opal Queen"
-                        6 -> "Opal Queen"
-                        7 -> "Opal Queen"
-                        else -> "Opal Queen"
-                    },
-                    modifier = Modifier.size(110.dp)
+                    title = "Dragon's Tale",
+                    modifier = Modifier.weight(1f)
+                )
+                TopPickCard(
+                    title = "Magic bla",
+                    modifier = Modifier.weight(1f)
+                )
+                TopPickCard(
+                    title = "Shadow Quest",
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            
+            // Row 2
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                TopPickCard(
+                    title = "The Fool",
+                    modifier = Modifier.weight(1f)
+                )
+                TopPickCard(
+                    title = "Explorei",
+                    modifier = Modifier.weight(1f)
+                )
+                TopPickCard(
+                    title = "Opal Queen",
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            
+            // Row 3
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                TopPickCard(
+                    title = "Opal Queen",
+                    modifier = Modifier.weight(1f)
+                )
+                TopPickCard(
+                    title = "Opal Queen",
+                    modifier = Modifier.weight(1f)
+                )
+                TopPickCard(
+                    title = "Opal Queen",
+                    modifier = Modifier.weight(1f)
                 )
             }
         }
@@ -404,7 +437,8 @@ private fun TopPickCard(
     ) {
         Box(
             modifier = Modifier
-                .size(110.dp, 138.dp)
+                .fillMaxWidth()
+                .aspectRatio(0.7f)
                 .clip(RoundedCornerShape(5.dp))
                 .background(Color(0xFFE5E7EB))
         )
