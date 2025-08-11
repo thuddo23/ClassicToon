@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
     private val mainModel: MainModel by viewModels()
     private val settingsModel: SettingsModel by viewModels()
 
+    private var tabScreens = listOf(ServerBooksScreen, HistoryScreen, BrowseScreen)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Splash screen
         installSplashScreen().apply {
@@ -138,14 +140,14 @@ class MainActivity : AppCompatActivity() {
                     },
                     contentKey = {
                         when (it) {
-                            LibraryScreen, HistoryScreen, BrowseScreen -> "tabs"
+                            in tabScreens -> "tabs"
                             else -> it
                         }
                     },
                     backHandlerEnabled = { it != StartScreen && it != SplashScreen }
                 ) { screen ->
                     when (screen) {
-                        LibraryScreen, HistoryScreen, BrowseScreen -> {
+                        in tabScreens -> {
                             NavigatorTabs(
                                 currentTab = screen,
                                 transitionSpec = {
