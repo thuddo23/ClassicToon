@@ -99,6 +99,7 @@
     <string name="drama_tab">ドラマ</string>
     <string name="mystery_tab">ミステリー</string>
     <string name="science_fiction_tab">SF</string>
+    <string name="other_tab">その他</string>
     <string name="color_tab">カラー</string>
     <string name="filter_tab">フィルタ</string>
     <string name="appearance_settings_desc">テーマ、カラー</string>

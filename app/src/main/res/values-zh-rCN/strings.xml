@@ -105,6 +105,7 @@
     <string name="drama_tab">剧情</string>
     <string name="mystery_tab">悬疑</string>
     <string name="science_fiction_tab">科幻</string>
+    <string name="other_tab">其他</string>
     <string name="color_tab">颜色</string>
     <string name="filter_tab">过滤</string>
     <string name="general_settings_desc">应用语言</string>

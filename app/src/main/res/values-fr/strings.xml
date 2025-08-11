@@ -59,6 +59,7 @@
     <string name="drama_tab">Drame</string>
     <string name="mystery_tab">Mystère</string>
     <string name="science_fiction_tab">Science-Fiction</string>
+    <string name="other_tab">Autre</string>
     <string name="general_tab">Général</string>
     <string name="filter_tab">Filtres</string>
     <string name="sort_tab">Trier</string>

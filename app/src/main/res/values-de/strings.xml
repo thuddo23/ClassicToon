@@ -52,6 +52,7 @@
     <string name="drama_tab">Drama</string>
     <string name="mystery_tab">Krimi</string>
     <string name="science_fiction_tab">Science Fiction</string>
+    <string name="other_tab">Sonstiges</string>
     <string name="general_tab">Allgemein</string>
     <string name="color_tab">Farben</string>
     <string name="general_settings_desc">App-Sprache</string>

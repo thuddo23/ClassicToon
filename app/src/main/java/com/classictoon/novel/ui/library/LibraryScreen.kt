@@ -107,6 +107,11 @@ object LibraryScreen : Screen, Parcelable {
                         category = Category.SCIENCE_FICTION,
                         title = UIText.StringResource(R.string.science_fiction_tab),
                         books = state.value.books.filter { it.data.category == Category.SCIENCE_FICTION }
+                    ),
+                    CategoryWithBooks(
+                        category = Category.OTHER,
+                        title = UIText.StringResource(R.string.other_tab),
+                        books = state.value.books.filter { it.data.category == Category.OTHER }
                     )
                 )
             }

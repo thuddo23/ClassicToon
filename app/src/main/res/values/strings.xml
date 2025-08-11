@@ -130,6 +130,7 @@
     <string name="drama_tab">Drama</string>
     <string name="mystery_tab">Mystery</string>
     <string name="science_fiction_tab">Science Fiction</string>
+    <string name="other_tab">Other</string>
     <string name="general_tab">General</string>
     <string name="display_tab">Display</string>
     <string name="color_tab">Colors</string>

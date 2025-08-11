@@ -66,6 +66,7 @@ fun BookInfoMoveDialog(
                     Category.DRAMA -> stringResource(id = R.string.drama_tab)
                     Category.MYSTERY -> stringResource(id = R.string.mystery_tab)
                     Category.SCIENCE_FICTION -> stringResource(id = R.string.science_fiction_tab)
+                    Category.OTHER -> stringResource(id = R.string.other_tab)
                 }
 
                 SelectableDialogItem(

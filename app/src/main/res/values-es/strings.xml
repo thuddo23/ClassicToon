@@ -37,6 +37,7 @@
     <string name="drama_tab">Drama</string>
     <string name="mystery_tab">Misterio</string>
     <string name="science_fiction_tab">Ciencia Ficción</string>
+    <string name="other_tab">Otro</string>
     <string name="color_tab">Colores</string>
     <string name="general_settings">General</string>
     <string name="appearance_settings">Apariencia</string>

@@ -27,9 +27,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.classictoon.novel.domain.library.book.Book
+import com.classictoon.novel.domain.library.category.Category
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.navigator.LocalNavigator
 import com.classictoon.novel.presentation.server_book_detail.ServerBookDetailScreen
+import com.classictoon.novel.R
+import androidx.compose.ui.res.stringResource
 
 object HomeScreen : Screen {
     @Composable
@@ -203,7 +206,17 @@ private fun ServerBookCard(
                 book.category?.let { category ->
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = category.name,
+                        text = when (category) {
+                            Category.FANTASY -> stringResource(id = R.string.reading_tab)
+                            Category.ROMANCE -> stringResource(id = R.string.already_read_tab)
+                            Category.ACTION -> stringResource(id = R.string.planning_tab)
+                            Category.THRILLER -> stringResource(id = R.string.dropped_tab)
+                            Category.COMEDY -> stringResource(id = R.string.comedy_tab)
+                            Category.DRAMA -> stringResource(id = R.string.drama_tab)
+                            Category.MYSTERY -> stringResource(id = R.string.mystery_tab)
+                            Category.SCIENCE_FICTION -> stringResource(id = R.string.science_fiction_tab)
+                            Category.OTHER -> stringResource(id = R.string.other_tab)
+                        },
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.primary
                     )

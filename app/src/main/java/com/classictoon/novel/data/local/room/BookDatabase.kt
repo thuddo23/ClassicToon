@@ -26,7 +26,7 @@ import java.io.File
         HistoryEntity::class,
         ColorPresetEntity::class,
     ],
-    version = 9,
+    version = 10,
     autoMigrations = [
         AutoMigration(1, 2),
         AutoMigration(2, 3),
@@ -36,6 +36,7 @@ import java.io.File
         AutoMigration(6, 7),
         AutoMigration(7, 8, spec = DatabaseHelper.MIGRATION_7_8::class),
         AutoMigration(8, 9, spec = DatabaseHelper.MIGRATION_8_9::class),
+        AutoMigration(9, 10, spec = DatabaseHelper.MIGRATION_9_10::class),
     ],
     exportSchema = true
 )
@@ -113,4 +114,24 @@ object DatabaseHelper {
 
     @DeleteTable("FavoriteDirectoryEntity")
     class MIGRATION_8_9 : AutoMigrationSpec
+
+    class MIGRATION_9_10 : AutoMigrationSpec {
+        companion object {
+            /**
+             * Migration to handle category changes from reading status to genres.
+             * Converts old category values to new genre values.
+             */
+            fun migrateCategories(db: SupportSQLiteDatabase) {
+                // Convert old reading status categories to new genre categories
+                // READING -> FANTASY (default for most books)
+                db.execSQL("UPDATE BookEntity SET category = 'FANTASY' WHERE category = 'READING'")
+                // ALREADY_READ -> ROMANCE (for completed books)
+                db.execSQL("UPDATE BookEntity SET category = 'ROMANCE' WHERE category = 'ALREADY_READ'")
+                // PLANNING -> ACTION (for planned books)
+                db.execSQL("UPDATE BookEntity SET category = 'ACTION' WHERE category = 'PLANNING'")
+                // DROPPED -> THRILLER (for abandoned books)
+                db.execSQL("UPDATE BookEntity SET category = 'THRILLER' WHERE category = 'DROPPED'")
+            }
+        }
+    }
 }
