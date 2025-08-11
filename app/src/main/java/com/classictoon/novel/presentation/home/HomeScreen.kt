@@ -50,22 +50,18 @@ fun HomeScreenContent(
                 .fillMaxSize()
                 .padding(top = paddingValues.calculateTopPadding())
         ) {
-            // Header Section
             item {
                 HeaderSection()
             }
             
-            // Featured Section
             item {
                 FeaturedSection()
             }
             
-            // Top Picks Section
             item {
                 TopPicksSection()
             }
             
-            // Category Section
             item {
                 CategorySection(
                     selectedCategory = selectedCategory,
@@ -73,12 +69,10 @@ fun HomeScreenContent(
                 )
             }
             
-            // Top Series by Category
             item {
                 TopSeriesSection()
             }
             
-            // Newest Arrivals
             item {
                 NewestArrivalsSection()
             }
