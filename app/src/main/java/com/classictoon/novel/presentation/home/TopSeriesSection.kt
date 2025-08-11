@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,7 +47,7 @@ fun TopSeriesSection() {
         Spacer(modifier = Modifier.height(16.dp))
         
         LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             val series = listOf(
                 "Kingdom Hearts" to "1",
@@ -66,12 +67,14 @@ private fun TopSeriesCard(
     title: String,
     rank: String
 ) {
+    val screenWidth = LocalConfiguration.current.screenWidthDp
+    val cardWidth = (screenWidth * 0.3f).dp
     Column(
-        modifier = Modifier.width(120.dp)
+        modifier = Modifier.width(cardWidth)
     ) {
         Box(
             modifier = Modifier
-                .size(117.dp, 144.dp)
+                .aspectRatio(0.7f)
                 .clip(RoundedCornerShape(5.dp))
                 .background(Color(0xFFE5E7EB))
         )
