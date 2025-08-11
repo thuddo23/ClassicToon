@@ -105,11 +105,6 @@ fun HomeScreenContent(
             item {
                 NewestArrivalsSection()
             }
-            
-            // Footer
-            item {
-                FooterSection()
-            }
         }
     }
 }
@@ -551,56 +546,6 @@ private fun NewestArrivalCard(
         )
     }
 }
-
-@Composable
-private fun FooterSection() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        // Navigation buttons
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            FooterButton(
-                icon = Icons.Default.Home,
-                text = "Home",
-                isSelected = true
-            )
-            FooterButton(
-                icon = Icons.Default.Search,
-                text = "Explore",
-                isSelected = false
-            )
-            FooterButton(
-                icon = Icons.Default.Person,
-                text = "Mine",
-                isSelected = false
-            )
-        }
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        // Advertisement space
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(61.dp)
-                .background(Color(0xFF374151))
-                .padding(16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Advertisement Space",
-                color = Color(0xFF9CA3AF),
-                fontSize = 14.sp
-            )
-        }
-    }
-}
-
 @Composable
 private fun FooterButton(
     icon: ImageVector,
