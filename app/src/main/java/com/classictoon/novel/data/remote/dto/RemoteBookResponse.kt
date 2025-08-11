@@ -17,5 +17,5 @@ data class RemoteBookResponse(
     @SerializedName("people_read")
     val peopleRead: Int,
     val cover: String,
-    val category: String
+    val category: Set<String>
 )

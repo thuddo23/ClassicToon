@@ -17,6 +17,7 @@ import com.classictoon.novel.domain.file.CachedFile
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.library.book.BookWithCover
 import com.classictoon.novel.domain.library.category.Category
+import com.classictoon.novel.domain.library.category.DEFAULT_CATEGORY
 import com.classictoon.novel.domain.ui.UIText
 import java.io.File
 import java.util.zip.ZipFile
@@ -91,7 +92,7 @@ class EpubFileParser @Inject constructor() : FileParser {
                             progress = 0f,
                             filePath = cachedFile.path,
                             lastOpened = null,
-                            category = Category.entries[0],
+                            category = DEFAULT_CATEGORY,
                             coverImage = null
                         ),
                         coverImage = extractCoverImageBitmap(rawFile, coverImage)

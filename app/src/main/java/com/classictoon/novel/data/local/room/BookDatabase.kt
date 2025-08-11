@@ -12,9 +12,11 @@ import androidx.room.Database
 import androidx.room.DeleteColumn
 import androidx.room.DeleteTable
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.room.migration.AutoMigrationSpec
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.classictoon.novel.data.converter.CategoryConverter
 import com.classictoon.novel.data.local.dto.BookEntity
 import com.classictoon.novel.data.local.dto.ColorPresetEntity
 import com.classictoon.novel.data.local.dto.HistoryEntity
@@ -40,6 +42,7 @@ import java.io.File
     ],
     exportSchema = true
 )
+@TypeConverters(CategoryConverter::class)
 abstract class BookDatabase : RoomDatabase() {
     abstract val dao: BookDao
 }

@@ -7,6 +7,7 @@
 package com.classictoon.novel.data.remote
 
 import com.classictoon.novel.data.remote.dto.RemoteBookResponse
+import com.classictoon.novel.domain.library.category.Category
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -32,7 +33,7 @@ class MockApiService @Inject constructor() {
         
         // Apply genre filter
         if (!genre.isNullOrBlank()) {
-            filteredBooks = filteredBooks.filter { it.category == genre }
+            filteredBooks = filteredBooks.filter { genre in it.category }
         }
         
         // Apply pagination
@@ -116,7 +117,7 @@ class MockApiService @Inject constructor() {
                 description = "This is the description for this book which index is $index\nBest seller 2025",
                 peopleRead = 1000 + (index * 100) % 10000,
                 cover = "https://picsum.photos/300/400?random=$index",
-                category = categories[index % categories.size]
+                category = Category.entries.map { it.toString() }.toSet()
             )
         }
     }

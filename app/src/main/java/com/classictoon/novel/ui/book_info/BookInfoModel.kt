@@ -362,13 +362,14 @@ class BookInfoModel @Inject constructor(
                             )
                         }
 
-                        _state.update {
+                        // TODO consider here later
+                        /*_state.update {
                             it.copy(
                                 book = it.book.copy(
                                     category = event.category
                                 )
                             )
-                        }
+                        }*/
                         updateBook.execute(_state.value.book)
 
                         LibraryScreen.refreshListChannel.trySend(0)

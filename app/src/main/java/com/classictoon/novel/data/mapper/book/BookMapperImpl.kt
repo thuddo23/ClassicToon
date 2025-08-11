@@ -12,6 +12,7 @@ import com.classictoon.novel.data.local.dto.BookEntity
 import com.classictoon.novel.data.remote.dto.RemoteBookResponse
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.library.category.Category
+import com.classictoon.novel.domain.library.category.DEFAULT_CATEGORY
 import com.classictoon.novel.domain.ui.UIText
 import javax.inject.Inject
 
@@ -60,7 +61,7 @@ class BookMapperImpl @Inject constructor() : BookMapper {
             progress = 0f,
             filePath = "",
             lastOpened = null,
-            category = Category.OTHER,
+            category = DEFAULT_CATEGORY,
             coverImage = remoteBookResponse.cover.toUri(),
         )
     }

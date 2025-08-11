@@ -18,5 +18,7 @@ enum class Category {
     DRAMA,
     MYSTERY,
     SCIENCE_FICTION,
-    OTHER,
+    ALL,
 }
+
+val DEFAULT_CATEGORY = setOf(Category.ALL)

@@ -206,7 +206,8 @@ class LibraryModel @Inject constructor(
 
             is LibraryEvent.OnActionMoveDialog -> {
                 viewModelScope.launch {
-                    _state.value.books.forEach { book ->
+                    // TODO consider here later
+                    /*_state.value.books.forEach { book ->
                         if (!book.selected) return@forEach
                         moveBooks.execute(
                             book.data.copy(
@@ -229,7 +230,7 @@ class LibraryModel @Inject constructor(
                             hasSelectedItems = false,
                             dialog = null
                         )
-                    }
+                    }*/
 
                     HistoryScreen.refreshListChannel.trySend(0)
                     LibraryScreen.scrollToPageCompositionChannel.trySend(

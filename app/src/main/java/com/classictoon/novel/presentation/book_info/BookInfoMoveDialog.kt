@@ -31,7 +31,7 @@ fun BookInfoMoveDialog(
     val context = LocalContext.current
 
     val categories = remember {
-        Category.entries.filter { book.category != it }
+        Category.entries.filter { it !in book.category }
     }
     val selectedCategory = remember {
         mutableStateOf(categories[0])
@@ -66,7 +66,7 @@ fun BookInfoMoveDialog(
                     Category.DRAMA -> stringResource(id = R.string.drama_tab)
                     Category.MYSTERY -> stringResource(id = R.string.mystery_tab)
                     Category.SCIENCE_FICTION -> stringResource(id = R.string.science_fiction_tab)
-                    Category.OTHER -> stringResource(id = R.string.other_tab)
+                    Category.ALL -> stringResource(id = R.string.other_tab)
                 }
 
                 SelectableDialogItem(

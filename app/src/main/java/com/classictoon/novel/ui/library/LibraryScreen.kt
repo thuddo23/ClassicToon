@@ -71,47 +71,47 @@ object LibraryScreen : Screen, Parcelable {
                     CategoryWithBooks(
                         category = Category.FANTASY,
                         title = UIText.StringResource(R.string.reading_tab),
-                        books = state.value.books.filter { it.data.category == Category.FANTASY }
+                        books = state.value.books.filter { Category.FANTASY in it.data.category }
                     ),
                     CategoryWithBooks(
                         category = Category.ROMANCE,
                         title = UIText.StringResource(R.string.already_read_tab),
-                        books = state.value.books.filter { it.data.category == Category.ROMANCE }
+                        books = state.value.books.filter { Category.ROMANCE in it.data.category }
                     ),
                     CategoryWithBooks(
                         category = Category.ACTION,
                         title = UIText.StringResource(R.string.planning_tab),
-                        books = state.value.books.filter { it.data.category == Category.ACTION }
+                        books = state.value.books.filter { Category.ACTION in it.data.category }
                     ),
                     CategoryWithBooks(
                         category = Category.THRILLER,
                         title = UIText.StringResource(R.string.dropped_tab),
-                        books = state.value.books.filter { it.data.category == Category.THRILLER }
+                        books = state.value.books.filter { Category.THRILLER in it.data.category }
                     ),
                     CategoryWithBooks(
                         category = Category.COMEDY,
                         title = UIText.StringResource(R.string.comedy_tab),
-                        books = state.value.books.filter { it.data.category == Category.COMEDY }
+                        books = state.value.books.filter { Category.COMEDY in it.data.category }
                     ),
                     CategoryWithBooks(
                         category = Category.DRAMA,
                         title = UIText.StringResource(R.string.drama_tab),
-                        books = state.value.books.filter { it.data.category == Category.DRAMA }
+                        books = state.value.books.filter { Category.DRAMA in it.data.category }
                     ),
                     CategoryWithBooks(
                         category = Category.MYSTERY,
                         title = UIText.StringResource(R.string.mystery_tab),
-                        books = state.value.books.filter { it.data.category == Category.MYSTERY }
+                        books = state.value.books.filter { Category.MYSTERY in it.data.category }
                     ),
                     CategoryWithBooks(
                         category = Category.SCIENCE_FICTION,
                         title = UIText.StringResource(R.string.science_fiction_tab),
-                        books = state.value.books.filter { it.data.category == Category.SCIENCE_FICTION }
+                        books = state.value.books.filter { Category.SCIENCE_FICTION in it.data.category }
                     ),
                     CategoryWithBooks(
-                        category = Category.OTHER,
+                        category = Category.ALL,
                         title = UIText.StringResource(R.string.other_tab),
-                        books = state.value.books.filter { it.data.category == Category.OTHER }
+                        books = state.value.books
                     )
                 )
             }

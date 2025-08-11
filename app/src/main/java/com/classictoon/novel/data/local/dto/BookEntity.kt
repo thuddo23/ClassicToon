@@ -9,6 +9,7 @@ package com.classictoon.novel.data.local.dto
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.classictoon.novel.domain.library.category.Category
+import com.classictoon.novel.domain.library.category.DEFAULT_CATEGORY
 
 @Entity
 data class BookEntity(
@@ -21,5 +22,5 @@ data class BookEntity(
     val scrollOffset: Int,
     val progress: Float,
     val image: String? = null,
-    val category: Category,
+    val category: Set<Category> = DEFAULT_CATEGORY,
 )

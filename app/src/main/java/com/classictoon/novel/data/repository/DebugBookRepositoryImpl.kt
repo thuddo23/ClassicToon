@@ -18,6 +18,7 @@ import com.classictoon.novel.domain.file.CachedFileBuilder
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.library.book.BookWithCover
 import com.classictoon.novel.domain.library.category.Category
+import com.classictoon.novel.domain.library.category.DEFAULT_CATEGORY
 import com.classictoon.novel.domain.reader.ReaderText
 import com.classictoon.novel.domain.repository.BookRepository
 import com.classictoon.novel.domain.ui.UIText
@@ -62,7 +63,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.MYSTERY
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 2,
@@ -75,7 +76,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.ROMANCE
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 3,
@@ -88,7 +89,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.DRAMA
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 4,
@@ -101,7 +102,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.DRAMA
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 5,
@@ -114,7 +115,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.SCIENCE_FICTION
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 6,
@@ -127,7 +128,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.DRAMA
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 7,
@@ -140,7 +141,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.THRILLER
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 8,
@@ -153,7 +154,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.FANTASY
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 9,
@@ -166,7 +167,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.SCIENCE_FICTION
+            category = DEFAULT_CATEGORY
         ),
         Book(
             id = 10,
@@ -179,7 +180,7 @@ class DebugBookRepositoryImpl @Inject constructor(
             scrollOffset = 0,
             progress = 0f,
             lastOpened = null,
-            category = Category.ROMANCE
+            category = DEFAULT_CATEGORY
         )
     )
 

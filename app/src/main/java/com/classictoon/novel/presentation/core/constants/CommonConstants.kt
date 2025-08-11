@@ -11,6 +11,7 @@ package com.classictoon.novel.presentation.core.constants
 import androidx.compose.ui.graphics.Color
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.library.category.Category
+import com.classictoon.novel.domain.library.category.DEFAULT_CATEGORY
 import com.classictoon.novel.domain.reader.ColorPreset
 import com.classictoon.novel.domain.ui.UIText
 
@@ -29,7 +30,7 @@ fun provideEmptyBook() = Book(
     scrollOffset = 0,
     progress = 0f,
     lastOpened = null,
-    category = Category.FANTASY
+    category = DEFAULT_CATEGORY
 )
 
 // Default Color Preset

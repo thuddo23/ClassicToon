@@ -39,7 +39,7 @@ fun LibraryMoveDialog(
     val moveCategories = remember {
         derivedStateOf {
             categories.mapNotNull { category ->
-                if (!selectedBooks.value.all { it.data.category == category.category }) {
+                if (!selectedBooks.value.all { category.category in it.data.category}) {
                     return@mapNotNull category
                 }
                 return@mapNotNull null

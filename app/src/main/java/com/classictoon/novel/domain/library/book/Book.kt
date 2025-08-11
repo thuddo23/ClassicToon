@@ -30,5 +30,5 @@ data class Book(
     val progress: Float,
 
     val lastOpened: Long?,
-    val category: Category
+    val category: Set<Category>
 ) : Parcelable
