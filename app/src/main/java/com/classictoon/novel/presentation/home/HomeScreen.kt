@@ -35,7 +35,7 @@ object HomeScreen : Screen {
     override fun Content() {
         val navigator = LocalNavigator.current
         
-        ServerBooksScreenContent(
+        HomeScreenContent(
             onBookClick = { bookId ->
                 navigator.push(ServerBookDetailScreen(bookId))
             }
@@ -44,7 +44,7 @@ object HomeScreen : Screen {
 }
 
 @Composable
-fun ServerBooksScreenContent(
+fun HomeScreenContent(
     onBookClick: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeModel = hiltViewModel()
@@ -63,61 +63,70 @@ fun ServerBooksScreenContent(
             }
     }
     
-    Column(modifier = modifier.fillMaxSize()) {
-        // Search bar
-        SearchBar(
-            query = searchQuery,
-            onQueryChange = { 
-                searchQuery = it
-                viewModel.searchBooks(it)
-            },
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        containerColor = MaterialTheme.colorScheme.surface
+    ) { paddingValues ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        )
-        
-        // Content
-        when {
-            uiState.isLoading && uiState.books.isEmpty() -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
-            uiState.error != null -> {
-                ErrorContent(
-                    error = uiState.error!!,
-                    onRetry = { viewModel.loadBooks() },
-                    onDismiss = { viewModel.clearError() }
-                )
-            }
-            else -> {
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(minSize = 160.dp),
-                    contentPadding = PaddingValues(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    state = gridState,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    items(uiState.books) { book ->
-                        ServerBookCard(
-                            book = book,
-                            onClick = { onBookClick(book.id.toString()) }
-                        )
+                .fillMaxSize()
+                .padding(top = paddingValues.calculateTopPadding())
+        ) {
+            // Search bar
+            SearchBar(
+                query = searchQuery,
+                onQueryChange = { 
+                    searchQuery = it
+                    viewModel.searchBooks(it)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            )
+            
+            // Content
+            when {
+                uiState.isLoading && uiState.books.isEmpty() -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
                     }
-                    
-                    if (uiState.isLoading) {
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                CircularProgressIndicator()
+                }
+                uiState.error != null -> {
+                    ErrorContent(
+                        error = uiState.error!!,
+                        onRetry = { viewModel.loadBooks() },
+                        onDismiss = { viewModel.clearError() }
+                    )
+                }
+                else -> {
+                    LazyVerticalGrid(
+                        columns = GridCells.Adaptive(minSize = 160.dp),
+                        contentPadding = PaddingValues(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                        state = gridState,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        items(uiState.books) { book ->
+                            ServerBookCard(
+                                book = book,
+                                onClick = { onBookClick(book.id.toString()) }
+                            )
+                        }
+                        
+                        if (uiState.isLoading) {
+                            item {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
+                                }
                             }
                         }
                     }
