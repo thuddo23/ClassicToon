@@ -104,11 +104,3 @@ class HomeModel @Inject constructor(
         _uiState.value = _uiState.value.copy(error = null)
     }
 }
-
-data class ServerBooksUiState(
-    val books: List<Book> = emptyList(),
-    val isLoading: Boolean = false,
-    val error: String? = null,
-    val currentPage: Int = 1,
-    val hasMorePages: Boolean = true
-)
