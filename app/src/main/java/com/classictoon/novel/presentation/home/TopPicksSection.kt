@@ -99,7 +99,7 @@ private fun TopPickCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(0.65f)
+                .aspectRatio(0.9f)
                 .clip(RoundedCornerShape(5.dp))
                 .background(Color(0xFFE5E7EB))
         )
