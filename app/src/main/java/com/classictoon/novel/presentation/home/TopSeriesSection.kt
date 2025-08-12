@@ -74,7 +74,8 @@ private fun TopSeriesCard(
     ) {
         Box(
             modifier = Modifier
-                .aspectRatio(0.7f)
+                .fillMaxWidth()
+                .aspectRatio(0.9f)
                 .clip(RoundedCornerShape(5.dp))
                 .background(Color(0xFFE5E7EB))
         )
@@ -83,7 +84,7 @@ private fun TopSeriesCard(
             text = rank,
             fontSize = 45.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
+            color = Color.Black,
             modifier = Modifier.padding(top = 8.dp)
         )
         
