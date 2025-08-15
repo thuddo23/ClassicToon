@@ -28,6 +28,7 @@ import com.classictoon.novel.domain.ui.isDark
 import com.classictoon.novel.domain.ui.isPureDark
 import com.classictoon.novel.presentation.core.components.navigation_bar.NavigationBar
 import com.classictoon.novel.presentation.core.components.navigation_rail.NavigationRail
+import com.classictoon.novel.presentation.main.HideSystemNavigation
 import com.classictoon.novel.presentation.main.MainActivityKeyboardManager
 import com.classictoon.novel.presentation.navigator.Navigator
 import com.classictoon.novel.presentation.navigator.NavigatorTabs
@@ -115,6 +116,7 @@ class MainActivity : AppCompatActivity() {
             )
 
             MainActivityKeyboardManager()
+            HideSystemNavigation()
 
             BookStoryTheme(
                 theme = state.value.theme,
