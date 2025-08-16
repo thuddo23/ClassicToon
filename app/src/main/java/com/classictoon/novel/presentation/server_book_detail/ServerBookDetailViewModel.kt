@@ -8,9 +8,7 @@ package com.classictoon.novel.presentation.server_book_detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.classictoon.novel.data.local.dto.BookEntity
 import com.classictoon.novel.domain.library.book.Book
-import com.classictoon.novel.domain.library.book.BookWithCover
 import com.classictoon.novel.domain.use_case.GetServerBookByIdUseCase
 import com.classictoon.novel.domain.use_case.GetServerBookContentUseCase
 import com.classictoon.novel.domain.use_case.DownloadBookUseCase

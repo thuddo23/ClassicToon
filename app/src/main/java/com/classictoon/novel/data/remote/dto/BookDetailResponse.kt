@@ -9,7 +9,7 @@ package com.classictoon.novel.data.remote.dto
 import com.google.gson.annotations.SerializedName
 
 data class BookDetailResponse(
-    val id: String,
+    val id: Int,
     val title: String,
     val type: String,
     val description: String,
@@ -32,7 +32,7 @@ data class BookDetailResponse(
 data class BookSource(
     val id: String,
     @SerializedName("bookId")
-    val bookId: String,
+    val bookId: Int,
     val url: String,
     @SerializedName("sizeBytes")
     val sizeBytes: Long? = null

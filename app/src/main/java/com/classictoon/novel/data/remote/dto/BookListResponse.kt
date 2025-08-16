@@ -9,7 +9,7 @@ package com.classictoon.novel.data.remote.dto
 import com.google.gson.annotations.SerializedName
 
 data class BookListResponse(
-    val id: String,
+    val id: Int,
     val title: String,
     val type: String? = null,
     @SerializedName("coverUrl")

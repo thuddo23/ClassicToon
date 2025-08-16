@@ -7,7 +7,8 @@
 package com.classictoon.novel.data.mapper.book
 
 import com.classictoon.novel.data.local.dto.BookEntity
-import com.classictoon.novel.data.remote.dto.RemoteBookResponse
+import com.classictoon.novel.data.remote.dto.BookDetailResponse
+import com.classictoon.novel.data.remote.dto.BookListResponse
 import com.classictoon.novel.domain.library.book.Book
 
 interface BookMapper {
@@ -15,5 +16,7 @@ interface BookMapper {
 
     suspend fun toBook(bookEntity: BookEntity): Book
 
-    suspend fun toBook(remoteBookResponse: RemoteBookResponse): Book
+    suspend fun toBook(book: BookListResponse): Book
+
+    suspend fun toBook(book: BookDetailResponse): Book
 }

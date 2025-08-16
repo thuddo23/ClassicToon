@@ -54,12 +54,12 @@ interface ApiService {
     
     @GET("books/{bookId}")
     suspend fun getBookDetail(
-        @Path("bookId") bookId: String
+        @Path("bookId") bookId: Int
     ): BookDetailResponse
     
     // Book content endpoint (kept for backward compatibility)
     @GET("books/{bookId}/content")
     suspend fun getBookContent(
-        @Path("bookId") bookId: String
+        @Path("bookId") bookId: Int
     ): String
 }

@@ -9,6 +9,7 @@ package com.classictoon.novel.data.mapper.book
 import androidx.core.net.toUri
 import com.classictoon.novel.R
 import com.classictoon.novel.data.local.dto.BookEntity
+import com.classictoon.novel.data.remote.dto.BookDetailResponse
 import com.classictoon.novel.data.remote.dto.BookListResponse
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.library.category.Category
@@ -50,25 +51,40 @@ class BookMapperImpl @Inject constructor() : BookMapper {
         )
     }
 
-    override suspend fun toBook(remoteBookResponse: BookListResponse): Book {
+    override suspend fun toBook(book: BookListResponse): Book {
         return Book(
-            id = remoteBookResponse.id.hashCode(), // Convert string ID to int for local storage
-            title = remoteBookResponse.title,
-            author = remoteBookResponse.authors.firstOrNull()?.let { UIText.StringValue(it) } 
-                ?: UIText.StringResource(R.string.unknown_author),
-            description = remoteBookResponse.description,
+            id = book.id.hashCode(), // Convert string ID to int for local storage
+            title = book.title,
+            author = UIText.StringResource(R.string.unknown_author), // book doesn't have authors field
+            description = "", // book doesn't have description field
             scrollIndex = 0,
             scrollOffset = 0,
             progress = 0f,
             filePath = "",
             lastOpened = null,
-            category = mapRemoteCategoriesToLocal(remoteBookResponse.categories),
-            coverImage = remoteBookResponse.coverUrl.toUri(),
+            category = mapRemoteCategoriesToLocal(book.categories),
+            coverImage = book.coverUrl?.toUri(),
+        )
+    }
+
+    override suspend fun toBook(book: BookDetailResponse): Book {
+        return Book(
+            id = book.id.hashCode(), // Convert string ID to int for local storage
+            title = book.title,
+            author = UIText.StringResource(R.string.unknown_author), // book doesn't have authors field
+            description = book.description,
+            scrollIndex = 0,
+            scrollOffset = 0,
+            progress = 0f,
+            filePath = book.source?.url?:"",
+            lastOpened = null,
+            category = mapRemoteCategoriesToLocal(book.categories),
+            coverImage = book.coverUrl.toUri(),
         )
     }
     
-    private fun mapRemoteCategoriesToLocal(remoteCategories: List<String>): Set<Category> {
-        if (remoteCategories.isEmpty()) return DEFAULT_CATEGORY
+    private fun mapRemoteCategoriesToLocal(remoteCategories: List<String>?): Set<Category> {
+        if (remoteCategories.isNullOrEmpty()) return DEFAULT_CATEGORY
         
         val mappedCategories = remoteCategories.mapNotNull { remoteCategory ->
             when (remoteCategory.lowercase()) {

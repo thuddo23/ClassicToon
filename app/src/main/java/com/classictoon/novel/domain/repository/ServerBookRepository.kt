@@ -30,11 +30,11 @@ interface ServerBookRepository {
         sort: String? = null
     ): List<Book>
     
-    suspend fun getBookById(bookId: String): Book?
+    suspend fun getBookById(bookId: Int): Book?
     
-    suspend fun getBookDetail(bookId: String): Book?
+    suspend fun getBookDetail(bookId: Int): Book?
     
-    suspend fun getBookContent(bookId: String): String
+    suspend fun getBookContent(bookId: Int): String
     
     // Legacy methods for backward compatibility
     suspend fun searchBooks(

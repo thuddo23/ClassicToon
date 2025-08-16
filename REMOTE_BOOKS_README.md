@@ -92,7 +92,7 @@ const val WRITE_TIMEOUT_SECONDS = 30L
 - Uses Retrofit for HTTP requests
 - Supports pagination, search, and category filtering
 
-#### 2. RemoteBookResponse
+#### 2. BookListResponse
 - DTO for API responses
 - Maps to the existing `ServerBook` domain model
 
