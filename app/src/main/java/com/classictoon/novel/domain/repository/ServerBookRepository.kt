@@ -11,21 +11,32 @@ import com.classictoon.novel.domain.library.book.Book
 
 interface ServerBookRepository {
     
+    // Feed methods
+    suspend fun getTrendingBooks(limit: Int = 20): List<Book>
+    
+    suspend fun getTopPicks(limit: Int = 20): List<Book>
+    
+    suspend fun getCategoryRanking(category: String, period: String = "weekly"): List<Book>
+    
+    suspend fun getNewestBooks(limit: Int = 20): List<Book>
+    
+    // Discovery methods
     suspend fun getBooks(
         page: Int = 1,
         limit: Int = 20,
         searchQuery: String? = null,
-        genre: String? = null
+        category: String? = null,
+        type: String? = null,
+        sort: String? = null
     ): List<Book>
     
-    suspend fun getBookById(
-        bookId: Int
-    ): Book?
+    suspend fun getBookById(bookId: String): Book?
     
-    suspend fun getBookContent(
-        bookId: Int
-    ): String // Returns HTML content
+    suspend fun getBookDetail(bookId: String): Book?
     
+    suspend fun getBookContent(bookId: String): String
+    
+    // Legacy methods for backward compatibility
     suspend fun searchBooks(
         query: String,
         page: Int = 1,

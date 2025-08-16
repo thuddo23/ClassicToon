@@ -19,8 +19,10 @@ class GetServerBooksUseCase @Inject constructor(
         page: Int = 1,
         limit: Int = 20,
         searchQuery: String? = null,
-        genre: String? = null
+        category: String? = null,
+        type: String? = null,
+        sort: String? = null
     ): List<Book> {
-        return repository.getBooks(page, limit, searchQuery, genre)
+        return repository.getBooks(page, limit, searchQuery, category, type, sort)
     }
 }

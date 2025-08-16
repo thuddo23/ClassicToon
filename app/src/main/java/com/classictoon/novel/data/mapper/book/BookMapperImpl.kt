@@ -9,7 +9,7 @@ package com.classictoon.novel.data.mapper.book
 import androidx.core.net.toUri
 import com.classictoon.novel.R
 import com.classictoon.novel.data.local.dto.BookEntity
-import com.classictoon.novel.data.remote.dto.RemoteBookResponse
+import com.classictoon.novel.data.remote.dto.BookListResponse
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.library.category.Category
 import com.classictoon.novel.domain.library.category.DEFAULT_CATEGORY
@@ -50,19 +50,43 @@ class BookMapperImpl @Inject constructor() : BookMapper {
         )
     }
 
-    override suspend fun toBook(remoteBookResponse: RemoteBookResponse): Book {
+    override suspend fun toBook(remoteBookResponse: BookListResponse): Book {
         return Book(
-            id = remoteBookResponse.bookId,
+            id = remoteBookResponse.id.hashCode(), // Convert string ID to int for local storage
             title = remoteBookResponse.title,
-            author = remoteBookResponse.author.let { UIText.StringValue(it) },
+            author = remoteBookResponse.authors.firstOrNull()?.let { UIText.StringValue(it) } 
+                ?: UIText.StringResource(R.string.unknown_author),
             description = remoteBookResponse.description,
             scrollIndex = 0,
             scrollOffset = 0,
             progress = 0f,
             filePath = "",
             lastOpened = null,
-            category = DEFAULT_CATEGORY,
-            coverImage = remoteBookResponse.cover.toUri(),
+            category = mapRemoteCategoriesToLocal(remoteBookResponse.categories),
+            coverImage = remoteBookResponse.coverUrl.toUri(),
         )
+    }
+    
+    private fun mapRemoteCategoriesToLocal(remoteCategories: List<String>): Set<Category> {
+        if (remoteCategories.isEmpty()) return DEFAULT_CATEGORY
+        
+        val mappedCategories = remoteCategories.mapNotNull { remoteCategory ->
+            when (remoteCategory.lowercase()) {
+                "fantasy" -> Category.FANTASY
+                "romance" -> Category.ROMANCE
+                "action" -> Category.ACTION
+                "thriller" -> Category.THRILLER
+                "comedy" -> Category.COMEDY
+                "drama" -> Category.DRAMA
+                "mystery" -> Category.MYSTERY
+                "science-fiction" -> Category.SCIENCE_FICTION
+                "adventure" -> Category.ACTION
+                "classic" -> Category.ROMANCE
+                "biography" -> Category.DRAMA
+                else -> null
+            }
+        }.toSet()
+        
+        return mappedCategories.ifEmpty { DEFAULT_CATEGORY }
     }
 }

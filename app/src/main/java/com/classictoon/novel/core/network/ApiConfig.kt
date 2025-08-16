@@ -8,10 +8,17 @@ package com.classictoon.novel.core.network
 
 object ApiConfig {
     // Replace with your actual API base URL
-    const val BASE_URL = "https://your-api-base-url.com/"
+    const val BASE_URL = "https://your-api-base-url.com/api/v1/"
     
-    // API endpoints
+    // Feed endpoints
+    const val FEED_TRENDING_ENDPOINT = "feed/everyone-reading"
+    const val FEED_TOP_PICKS_ENDPOINT = "feed/top-picks"
+    const val FEED_RANKING_ENDPOINT = "feed/ranking"
+    const val FEED_NEWEST_ENDPOINT = "feed/newest"
+    
+    // Discovery endpoints
     const val BOOKS_ENDPOINT = "books"
+    const val BOOK_DETAIL_ENDPOINT = "books/{bookId}"
     const val BOOK_CONTENT_ENDPOINT = "books/{bookId}/content"
     
     // Default pagination
