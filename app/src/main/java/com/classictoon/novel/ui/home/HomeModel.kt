@@ -12,6 +12,9 @@ import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.use_case.GetServerBooksUseCase
 import com.classictoon.novel.domain.use_case.GetServerBookByIdUseCase
 import com.classictoon.novel.domain.use_case.GetServerBookContentUseCase
+import com.classictoon.novel.domain.use_case.GetTrendingBooksUseCase
+import com.classictoon.novel.domain.use_case.GetTopPicksUseCase
+import com.classictoon.novel.domain.use_case.GetNewestBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,14 +26,42 @@ import javax.inject.Inject
 class HomeModel @Inject constructor(
     private val getServerBooksUseCase: GetServerBooksUseCase,
     private val getServerBookByIdUseCase: GetServerBookByIdUseCase,
-    private val getServerBookContentUseCase: GetServerBookContentUseCase
+    private val getServerBookContentUseCase: GetServerBookContentUseCase,
+    private val getTrendingBooksUseCase: GetTrendingBooksUseCase,
+    private val getTopPicksUseCase: GetTopPicksUseCase,
+    private val getNewestBooksUseCase: GetNewestBooksUseCase
 ) : ViewModel() {
     
-    private val _uiState = MutableStateFlow(ServerBooksUiState())
-    val uiState: StateFlow<ServerBooksUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(HomeUiState())
+    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
     
     init {
-        loadBooks()
+        loadHomeFeed()
+    }
+    
+    fun loadHomeFeed() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            
+            try {
+                // Load all feed sections in parallel
+                val trendingBooks = getTrendingBooksUseCase(10)
+                val topPicks = getTopPicksUseCase(10)
+                val newestBooks = getNewestBooksUseCase(10)
+                
+                _uiState.value = _uiState.value.copy(
+                    trendingBooks = trendingBooks,
+                    topPicks = topPicks,
+                    newestBooks = newestBooks,
+                    isLoading = false
+                )
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(
+                    error = e.message ?: "Failed to load home feed",
+                    isLoading = false
+                )
+            }
+        }
     }
     
     fun loadBooks(

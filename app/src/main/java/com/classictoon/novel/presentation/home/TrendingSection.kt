@@ -2,6 +2,7 @@ package com.classictoon.novel.presentation.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -18,37 +19,58 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.fontscaling.MathUtils.lerp
 import androidx.compose.ui.unit.sp
+import com.classictoon.novel.domain.library.book.Book
 import kotlin.math.absoluteValue
 
 @Composable
-fun FeaturedSection() {
-    val featuredBooks = listOf(
-        FeaturedBook(
-            title = "Dragon's Tale",
-            tags = listOf("#Fantasy", "#Romance"),
-            isNewUpdate = true
-        ),
-        FeaturedBook(
-            title = "Shadow Quest",
-            tags = listOf("#Adventure", "#Mystery"),
-            isNewUpdate = false
-        ),
-        FeaturedBook(
-            title = "Magic Academy",
-            tags = listOf("#Fantasy", "#School"),
-            isNewUpdate = true
-        ),
-        FeaturedBook(
-            title = "The Fool's Journey",
-            tags = listOf("#Adventure", "#Comedy"),
-            isNewUpdate = false
-        ),
-        FeaturedBook(
-            title = "Opal Queen",
-            tags = listOf("#Romance", "#Fantasy"),
-            isNewUpdate = false
+fun TrendingSection(
+    trendingBooks: List<Book>,
+    onBookClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val featuredBooks = if (trendingBooks.isNotEmpty()) {
+        trendingBooks.map { book ->
+            FeaturedBook(
+                id = book.id,
+                title = book.title,
+                tags = listOf("#${book.category}", "#Popular"),
+                isNewUpdate = true
+            )
+        }
+    } else {
+        listOf(
+            FeaturedBook(
+                id = 1,
+                title = "Dragon's Tale",
+                tags = listOf("#Fantasy", "#Romance"),
+                isNewUpdate = true
+            ),
+            FeaturedBook(
+                id = 2,
+                title = "Shadow Quest",
+                tags = listOf("#Adventure", "#Mystery"),
+                isNewUpdate = false
+            ),
+            FeaturedBook(
+                id = 3,
+                title = "Magic Academy",
+                tags = listOf("#Fantasy", "#School"),
+                isNewUpdate = true
+            ),
+            FeaturedBook(
+                id = 4,
+                title = "The Fool's Journey",
+                tags = listOf("#Adventure", "#Comedy"),
+                isNewUpdate = false
+            ),
+            FeaturedBook(
+                id = 5,
+                title = "Opal Queen",
+                tags = listOf("#Romance", "#Fantasy"),
+                isNewUpdate = false
+            )
         )
-    )
+    }
     
     // Create infinite scroll by repeating the list
     val infiniteBooks = remember(featuredBooks) {
@@ -63,7 +85,7 @@ fun FeaturedSection() {
     )
     
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
     ) {
         Text(
@@ -86,13 +108,15 @@ fun FeaturedSection() {
             FeaturedCard(
                 book = infiniteBooks[page],
                 pagerState = pagerState,
-                page = page
+                page = page,
+                onClick = { onBookClick(infiniteBooks[page].id) }
             )
         }
     }
 }
 
 data class FeaturedBook(
+    val id: Int,
     val title: String,
     val tags: List<String>,
     val isNewUpdate: Boolean
@@ -104,11 +128,13 @@ private fun FeaturedCard(
     book: FeaturedBook,
     pagerState: PagerState,
     page: Int,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
             .padding(0.dp)
+            .clickable { onClick() }
             .graphicsLayer {
                 val pageOffset = (
                     (pagerState.currentPage - page) + pagerState
