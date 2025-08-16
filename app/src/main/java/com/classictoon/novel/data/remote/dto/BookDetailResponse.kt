@@ -30,7 +30,7 @@ data class BookDetailResponse(
 )
 
 data class BookSource(
-    val id: String,
+    val id: Int,
     @SerializedName("bookId")
     val bookId: Int,
     val url: String,
