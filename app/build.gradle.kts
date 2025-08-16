@@ -139,4 +139,70 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
+    
+    // Testing Dependencies
+    testImplementation(kotlin("test"))
+    
+    // JUnit 4
+    testImplementation("junit:junit:4.13.2")
+    
+    // MockK for mocking
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk-android:1.13.8")
+    
+    // Kotlin Coroutines Test
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    
+    // Robolectric for Android testing
+    testImplementation("org.robolectric:robolectric:4.11.1")
+    
+    // MockWebServer for API testing
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
+    
+    // Truth assertions (alternative to JUnit assertions)
+    testImplementation("com.google.truth:truth:1.1.5")
+    
+    // Turbine for testing flows
+    testImplementation("app.cash.turbine:turbine:1.0.0")
+    
+    // AndroidX Test
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test:runner:1.5.2")
+    testImplementation("androidx.test:rules:1.5.0")
+    testImplementation("androidx.test.ext:junit:1.1.5")
+    
+    // AndroidX Test Espresso
+    testImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+    testImplementation("androidx.test.espresso:espresso-intents:3.5.1")
+    
+    // Compose Testing
+    testImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
+    testImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
+    
+    // Hilt Testing
+    testImplementation("com.google.dagger:hilt-android-testing:2.48")
+    kspTest("com.google.dagger:hilt-android-compiler:2.48")
+    
+    // Room Testing
+    testImplementation("androidx.room:room-testing:2.6.1")
+    
+    // Arch Core Testing
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    
+    // Mockito (alternative to MockK)
+    testImplementation("org.mockito:mockito-core:5.7.0")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    
+    // JSON Testing
+    testImplementation("org.json:json:20231013")
+    
+    // WireMock for API mocking (alternative to MockWebServer)
+    testImplementation("org.wiremock:wiremock-standalone:3.2.0")
+    
+    // Test Rules
+    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
+    testImplementation("androidx.test.ext:truth:1.5.0")
 }
