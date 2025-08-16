@@ -72,7 +72,7 @@ fun HomeScreenContent(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = "Error loading content",
+                        text = uiState.error?:"Error loading content",
                         color = Color.Red
                     )
                     Button(
