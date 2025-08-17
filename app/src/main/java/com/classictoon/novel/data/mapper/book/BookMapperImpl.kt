@@ -53,7 +53,7 @@ class BookMapperImpl @Inject constructor() : BookMapper {
 
     override suspend fun toBook(book: BookListResponse): Book {
         return Book(
-            id = book.id.hashCode(), // Convert string ID to int for local storage
+            id = book.id, // Convert string ID to int for local storage
             title = book.title,
             author = UIText.StringResource(R.string.unknown_author), // book doesn't have authors field
             description = "", // book doesn't have description field
@@ -69,7 +69,7 @@ class BookMapperImpl @Inject constructor() : BookMapper {
 
     override suspend fun toBook(book: BookDetailResponse): Book {
         return Book(
-            id = book.id.hashCode(), // Convert string ID to int for local storage
+            id = book.id, // Convert string ID to int for local storage
             title = book.title,
             author = UIText.StringResource(R.string.unknown_author), // book doesn't have authors field
             description = book.description,
