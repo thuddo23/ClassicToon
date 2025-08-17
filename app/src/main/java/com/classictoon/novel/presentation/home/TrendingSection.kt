@@ -1,6 +1,7 @@
 package com.classictoon.novel.presentation.home
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,12 +16,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.ColorPainter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.fontscaling.MathUtils.lerp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.classictoon.novel.domain.library.book.Book
 import kotlin.math.absoluteValue
+import com.classictoon.novel.R
 
 @Composable
 fun TrendingSection(
@@ -32,45 +38,13 @@ fun TrendingSection(
         trendingBooks.map { book ->
             FeaturedBook(
                 id = book.id,
+                coverUrl = book.coverImage,
                 title = book.title,
                 tags = listOf("#${book.category}", "#Popular"),
                 isNewUpdate = true
             )
         }
-    } else {
-        listOf(
-            FeaturedBook(
-                id = 1,
-                title = "Dragon's Tale",
-                tags = listOf("#Fantasy", "#Romance"),
-                isNewUpdate = true
-            ),
-            FeaturedBook(
-                id = 2,
-                title = "Shadow Quest",
-                tags = listOf("#Adventure", "#Mystery"),
-                isNewUpdate = false
-            ),
-            FeaturedBook(
-                id = 3,
-                title = "Magic Academy",
-                tags = listOf("#Fantasy", "#School"),
-                isNewUpdate = true
-            ),
-            FeaturedBook(
-                id = 4,
-                title = "The Fool's Journey",
-                tags = listOf("#Adventure", "#Comedy"),
-                isNewUpdate = false
-            ),
-            FeaturedBook(
-                id = 5,
-                title = "Opal Queen",
-                tags = listOf("#Romance", "#Fantasy"),
-                isNewUpdate = false
-            )
-        )
-    }
+    } else return
     
     // Create infinite scroll by repeating the list
     val infiniteBooks = remember(featuredBooks) {
@@ -89,7 +63,7 @@ fun TrendingSection(
             .fillMaxWidth()
     ) {
         Text(
-            text = "What's everyone reading",
+            text = stringResource(R.string.trending_section_title),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -117,6 +91,7 @@ fun TrendingSection(
 
 data class FeaturedBook(
     val id: Int,
+    val coverUrl: Uri?,
     val title: String,
     val tags: List<String>,
     val isNewUpdate: Boolean
@@ -166,15 +141,16 @@ private fun FeaturedCard(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFF7C3AED))
+                .background(MaterialTheme.colorScheme.surfaceContainerLow)
         ) {
-            // Placeholder for image - you can replace with actual AsyncImage
-            Box(
+            AsyncImage(
+                model = book.coverUrl,
+                contentDescription = null,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(0xFF7C3AED))
+                    .fillMaxSize(),
+                placeholder = ColorPainter(MaterialTheme.colorScheme.surfaceContainerLow),
+                contentScale = ContentScale.Crop
             )
-            
             // Content overlay
             Column(
                 modifier = Modifier

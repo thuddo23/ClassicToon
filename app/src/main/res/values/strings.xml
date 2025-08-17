@@ -634,5 +634,6 @@
     <string name="explore_content_desc">Explore screen</string>
     <string name="mine_screen">Mine</string>
     <string name="mine_content_desc">Mine information</string>
+    <string name="trending_section_title">What\'s everyone reading</string>
 
 </resources>
