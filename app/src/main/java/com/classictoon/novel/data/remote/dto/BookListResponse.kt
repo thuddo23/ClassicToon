@@ -12,7 +12,7 @@ data class BookListResponse(
     val id: Int,
     val title: String,
     val type: String? = null,
-    @SerializedName("coverUrl")
+    @SerializedName("cover_url")
     val coverUrl: String? = null,
     val categories: List<String>? = null,
     val metrics: BookMetrics? = null,
@@ -23,6 +23,6 @@ data class BookListResponse(
 data class BookMetrics(
     val reads: Int,
     val likes: Int? = null,
-    @SerializedName("ratingAvg")
+    @SerializedName("rating_avg")
     val ratingAvg: Double? = null
 )

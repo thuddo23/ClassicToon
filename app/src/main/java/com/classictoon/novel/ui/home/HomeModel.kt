@@ -46,9 +46,9 @@ class HomeModel @Inject constructor(
             try {
                 // Load all feed sections in parallel
                 val trendingBooks = getTrendingBooksUseCase(10)
-                val topPicks = getTopPicksUseCase(10)
                 val newestBooks = getNewestBooksUseCase(10)
-                
+                val topPicks = getTopPicksUseCase(10)
+
                 _uiState.value = _uiState.value.copy(
                     trendingBooks = trendingBooks,
                     topPicks = topPicks,

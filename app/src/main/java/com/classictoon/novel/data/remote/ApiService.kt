@@ -11,6 +11,7 @@ import com.classictoon.novel.data.remote.dto.BookDetailResponse
 import com.classictoon.novel.data.remote.dto.BookSearchResponse
 import com.classictoon.novel.data.remote.dto.TopPicksResponse
 import com.classictoon.novel.data.remote.dto.RankingResponse
+import com.classictoon.novel.data.remote.dto.TopPickItem
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -28,7 +29,7 @@ interface ApiService {
     @GET("feed/top-picks")
     suspend fun getTopPicks(
         @Query("limit") limit: Int = 20
-    ): TopPicksResponse
+    ): List<TopPickItem>
     
     @GET("feed/ranking")
     suspend fun getCategoryRanking(

@@ -32,7 +32,7 @@ class ServerBookRepositoryImpl @Inject constructor(
     override suspend fun getTopPicks(limit: Int): List<Book> {
         return try {
             val response = apiService.getTopPicks(limit)
-            response.items.map { bookMapper.toBook(it.book) }
+            response.map { bookMapper.toBook(it.book) }
         } catch (e: Exception) {
             throw e
         }
