@@ -63,25 +63,35 @@ fun BookCoverSection(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            
-            // Future: Add genre, rating, etc.
-            // book.genre?.let { genre ->
-            //     Spacer(modifier = Modifier.height(4.dp))
-            //     Text(
-            //         text = genre,
-            //         style = MaterialTheme.typography.bodySmall,
-            //         color = MaterialTheme.colorScheme.primary
-            //     )
-            // }
-            
-            // book.rating?.let { rating ->
-            //     Spacer(modifier = Modifier.height(4.dp))
-            //     Text(
-            //         text = "★ $rating",
-            //         style = MaterialTheme.typography.bodyMedium,
-            //         color = MaterialTheme.colorScheme.onSurfaceVariant
-            //     )
-            // }
+            DetailRow("Author", book.author.asString())
+            DetailRow("Categories", book.category.joinToString(", ") { it.name })
+            DetailRow("Progress", "${(book.progress * 100).toInt()}%")
+        }
+    }
+}
+
+@Composable
+private fun DetailRow(
+    label: String,
+    value: String?,
+    modifier: Modifier = Modifier
+) {
+    if (value != null) {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp)
+        ) {
+            Text(
+                text = "$label:",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.width(100.dp)
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyMedium
+            )
         }
     }
 }

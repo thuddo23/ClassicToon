@@ -29,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import kotlinx.coroutines.delay
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.navigator.LocalNavigator
+import com.classictoon.novel.presentation.server_book_detail.ChapterSection
+import com.classictoon.novel.presentation.server_book_detail.ErrorContent
 
 class ServerBookDetailScreen(private val bookId: Int) : Screen {
     @Composable
@@ -94,13 +97,16 @@ fun ServerBookDetailScreenContent(
                 BookDetailContent(
                     book = uiState.book!!,
                     onReadBook = onReadBook,
-                    onDownloadBook = { bookId -> viewModel.downloadBook(bookId) },
-                    isDownloading = uiState.isDownloading,
+                    isDownloadingContent = uiState.isDownloadingContent,
+                    onChapterClick = { chapterIndex, chapterTitle ->
+                        // TODO: Navigate to chapter reader
+                        println("Chapter clicked: $chapterIndex - $chapterTitle")
+                    },
                     modifier = Modifier.padding(paddingValues)
                 )
                 
                 // Show download success message
-                if (uiState.downloadSuccess) {
+                if (uiState.contentDownloadSuccess) {
                     LaunchedEffect(Unit) {
                         // Clear success state after 3 seconds
                         kotlinx.coroutines.delay(3000)
@@ -115,7 +121,7 @@ fun ServerBookDetailScreenContent(
                             }
                         }
                     ) {
-                        Text("Book downloaded successfully!")
+                        Text("Book content downloaded successfully!")
                     }
                 }
             }
@@ -127,33 +133,36 @@ fun ServerBookDetailScreenContent(
 private fun BookDetailContent(
     book: Book,
     onReadBook: (String) -> Unit,
-    onDownloadBook: (Int) -> Unit,
-    isDownloading: Boolean = false,
+    isDownloadingContent: Boolean = false,
+    onChapterClick: (Int, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+//            .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
         BookCoverSection(book = book)
         
         Spacer(modifier = Modifier.height(24.dp))
-        
-        BookActionButtons(
-            onReadBook = { onReadBook(book.id.toString()) },
-            onDownloadBook = { onDownloadBook(book.id) },
-            isDownloading = isDownloading
-        )
-        
-        Spacer(modifier = Modifier.height(24.dp))
-        
+
         BookDescriptionSection(description = book.description)
         
         Spacer(modifier = Modifier.height(24.dp))
-        
-        BookDetailsSection(book = book)
+
+        BookActionButtons(
+            onReadBook = { onReadBook(book.id.toString()) },
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        ChapterSection(
+            bookId = book.id,
+            bookTitle = book.title,
+            onChapterClick = onChapterClick,
+            isDownloadingContent = isDownloadingContent
+        )
     }
 }
 

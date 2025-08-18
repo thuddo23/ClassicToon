@@ -109,7 +109,6 @@ private fun FeaturedCard(
     Card(
         modifier = modifier
             .padding(0.dp)
-            .clickable { onClick() }
             .graphicsLayer {
                 val pageOffset = (
                     (pagerState.currentPage - page) + pagerState
@@ -134,7 +133,8 @@ private fun FeaturedCard(
                 this.alpha = alpha
             }
             .fillMaxWidth()
-            .fillMaxHeight(),
+            .fillMaxHeight()
+            .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
