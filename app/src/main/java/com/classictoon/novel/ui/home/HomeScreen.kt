@@ -23,7 +23,7 @@ import com.classictoon.novel.presentation.home.TopPicksSection
 import com.classictoon.novel.presentation.home.TopSeriesSection
 import com.classictoon.novel.presentation.home.TrendingSection
 import com.classictoon.novel.presentation.navigator.LocalNavigator
-import com.classictoon.novel.presentation.server_book_detail.ServerBookDetailScreen
+import com.classictoon.novel.ui.book_detail.ServerBookDetailScreen
 
 object HomeScreen : Screen {
     @Composable

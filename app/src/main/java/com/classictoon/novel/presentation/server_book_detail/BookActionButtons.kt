@@ -10,7 +10,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BookActionButtons(
-    onReadBook: () -> Unit,
+    onReadBook: (String) -> Unit,
+    bookId: String,
+    enabled: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -19,12 +21,13 @@ fun BookActionButtons(
     ) {
         // Read button
         Button(
-            onClick = onReadBook,
+            onClick = { onReadBook(bookId) },
+            enabled = enabled,
             modifier = Modifier.weight(1f)
         ) {
             Icon(Icons.Default.Book, contentDescription = null)
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Read Book")
+            Text(if (enabled) "Read Book" else "Preparing Book...")
         }
     }
 }

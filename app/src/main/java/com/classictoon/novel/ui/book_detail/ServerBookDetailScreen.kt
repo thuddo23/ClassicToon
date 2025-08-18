@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-package com.classictoon.novel.presentation.server_book_detail
+package com.classictoon.novel.ui.book_detail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
@@ -37,8 +35,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.classictoon.novel.domain.library.book.Book
 import com.classictoon.novel.domain.navigator.Screen
 import com.classictoon.novel.presentation.navigator.LocalNavigator
+import com.classictoon.novel.presentation.server_book_detail.BookActionButtons
+import com.classictoon.novel.presentation.server_book_detail.BookCoverSection
+import com.classictoon.novel.presentation.server_book_detail.BookDescriptionSection
 import com.classictoon.novel.presentation.server_book_detail.ChapterSection
 import com.classictoon.novel.presentation.server_book_detail.ErrorContent
+import com.classictoon.novel.ui.reader.ReaderScreen
 
 class ServerBookDetailScreen(private val bookId: Int) : Screen {
     @Composable
@@ -49,7 +51,7 @@ class ServerBookDetailScreen(private val bookId: Int) : Screen {
             bookId = bookId,
             onBackClick = { navigator.pop() },
             onReadBook = { bookId ->
-//                navigator.push(ServerBookReaderScreen(bookId))
+                navigator.push(ReaderScreen(bookId.toInt()))
             }
         )
     }
@@ -96,6 +98,7 @@ fun ServerBookDetailScreenContent(
             uiState.book != null -> {
                 BookDetailContent(
                     book = uiState.book!!,
+                    savedBook = uiState.savedBook,
                     onReadBook = onReadBook,
                     isDownloadingContent = uiState.isDownloadingContent,
                     onChapterClick = { chapterIndex, chapterTitle ->
@@ -109,7 +112,7 @@ fun ServerBookDetailScreenContent(
                 if (uiState.contentDownloadSuccess) {
                     LaunchedEffect(Unit) {
                         // Clear success state after 3 seconds
-                        kotlinx.coroutines.delay(3000)
+                        delay(3000)
                         viewModel.clearError()
                     }
                     
@@ -132,6 +135,7 @@ fun ServerBookDetailScreenContent(
 @Composable
 private fun BookDetailContent(
     book: Book,
+    savedBook: Book?,
     onReadBook: (String) -> Unit,
     isDownloadingContent: Boolean = false,
     onChapterClick: (Int, String) -> Unit,
@@ -152,7 +156,9 @@ private fun BookDetailContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         BookActionButtons(
-            onReadBook = { onReadBook(book.id.toString()) },
+            onReadBook = onReadBook,
+            bookId = (savedBook?.id ?: book.id).toString(),
+            enabled = savedBook != null && !isDownloadingContent
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -161,7 +167,7 @@ private fun BookDetailContent(
             bookId = book.id,
             bookTitle = book.title,
             onChapterClick = onChapterClick,
-            isDownloadingContent = isDownloadingContent
+            isDownloadingContent = isDownloadingContent,
         )
     }
 }

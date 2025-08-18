@@ -17,7 +17,6 @@ import com.classictoon.novel.domain.ui.UIText
 @Immutable
 data class Book(
     val id: Int = 0,
-
     val title: String,
     val author: UIText,
     val description: String?,

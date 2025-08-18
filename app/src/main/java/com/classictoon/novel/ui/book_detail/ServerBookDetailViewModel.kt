@@ -4,15 +4,19 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-package com.classictoon.novel.presentation.server_book_detail
+package com.classictoon.novel.ui.book_detail
 
 import android.app.Application
-import android.content.Context
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.classictoon.novel.domain.library.book.Book
+import com.classictoon.novel.domain.library.book.BookWithCover
+import com.classictoon.novel.domain.library.category.Category
 import com.classictoon.novel.domain.use_case.GetServerBookByIdUseCase
 import com.classictoon.novel.domain.use_case.GetServerBookContentUseCase
+import com.classictoon.novel.domain.use_case.book.InsertBook
+import com.classictoon.novel.domain.ui.UIText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,6 +29,7 @@ import javax.inject.Inject
 class ServerBookDetailViewModel @Inject constructor(
     private val getServerBookByIdUseCase: GetServerBookByIdUseCase,
     private val getServerBookContentUseCase: GetServerBookContentUseCase,
+    private val insertBook: InsertBook,
     private val context: Application,
 ) : ViewModel() {
     
@@ -44,7 +49,7 @@ class ServerBookDetailViewModel @Inject constructor(
                     )
                     
                     // Auto-download book content after loading book details
-                    autoDownloadBookContent(bookId, book.title)
+                    autoDownloadBookContent(bookId, book)
                 } else {
                     _uiState.value = _uiState.value.copy(
                         error = "Book not found",
@@ -60,7 +65,7 @@ class ServerBookDetailViewModel @Inject constructor(
         }
     }
     
-    private fun autoDownloadBookContent(bookId: Int, bookTitle: String) {
+    private fun autoDownloadBookContent(bookId: Int, serverBook: Book) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isDownloadingContent = true, error = null)
             
@@ -79,9 +84,32 @@ class ServerBookDetailViewModel @Inject constructor(
                 // Write content to file
                 file.writeText(content)
                 
+                // Create a Book entity for Room database
+                val bookForRoom = Book(
+                    id = bookId, // Room will auto-generate the ID
+                    title = serverBook.title,
+                    author = serverBook.author,
+                    description = serverBook.description,
+                    filePath = file.absolutePath,
+                    coverImage = serverBook.coverImage,
+                    scrollIndex = 0,
+                    scrollOffset = 0,
+                    progress = 0f,
+                    lastOpened = System.currentTimeMillis(),
+                    category = serverBook.category
+                )
+                
+                // Save book to Room database
+                insertBook.execute(BookWithCover(
+                    book = bookForRoom,
+                    coverImage = null // No cover image for now, can be updated later
+                ))
+                
                 _uiState.value = _uiState.value.copy(
                     isDownloadingContent = false,
-                    contentDownloadSuccess = true
+                    contentDownloadSuccess = true,
+                    savedBook = bookForRoom,
+                    savedFileName = fileName
                 )
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
@@ -102,5 +130,7 @@ data class ServerBookDetailUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
     val isDownloadingContent: Boolean = false,
-    val contentDownloadSuccess: Boolean = false
+    val contentDownloadSuccess: Boolean = false,
+    val savedBook: Book? = null,
+    val savedFileName: String? = null
 )
