@@ -8,7 +8,7 @@ package com.classictoon.novel.core.network
 
 object ApiConfig {
     // Replace with your actual API base URL
-    const val BASE_URL = "http://10.0.2.2:8000/api/v1/"
+    const val BASE_URL = "http://192.168.100.158:8000/api/v1/"
     
     // Feed endpoints
     const val FEED_TRENDING_ENDPOINT = "feed/everyone-reading"
