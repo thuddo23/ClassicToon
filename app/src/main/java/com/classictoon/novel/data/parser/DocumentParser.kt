@@ -12,9 +12,11 @@ import androidx.compose.ui.graphics.asImageBitmap
 import kotlinx.coroutines.yield
 import org.jsoup.nodes.Document
 import com.classictoon.novel.domain.reader.ReaderText
+import com.classictoon.novel.presentation.core.util.addAll
 import com.classictoon.novel.presentation.core.util.clearAllMarkdown
 import com.classictoon.novel.presentation.core.util.clearMarkdown
 import com.classictoon.novel.presentation.core.util.containsVisibleText
+import org.jsoup.nodes.Element
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
@@ -27,6 +29,7 @@ class DocumentParser @Inject constructor(
      * Parses document to get it's text.
      * Fixes issues such as manual line breaking in <p>.
      * Applies Markdown to the text: Bold(**), Italic(_), Section separator(---), and Links(a > href).
+     * Now also handles chapter-tab divs for HTML books with proper chapter structure.
      *
      * @return Parsed text line by line with Markdown(all lines are not blank).
      */
@@ -41,8 +44,111 @@ class DocumentParser @Inject constructor(
         val readerText = mutableListOf<ReaderText>()
         var chapterAdded = false
 
-        document.selectFirst("body")
-            .run { this ?: document.body() }
+        // Check if this is an HTML book with chapter-tab structure
+        val hasChapterTabs = document.select("div.chapter-tab").isNotEmpty()
+
+        if (hasChapterTabs) {
+            val result = parseHtmlBookWithChapters(document, zipFile, imageEntries)
+            if (result.isNotEmpty()) return result
+        } else {
+            val body = document.selectFirst("body")
+                .run { this ?: document.body() }
+            val result = handleContent(body, zipFile, imageEntries, includeChapter)
+            readerText.addAll(result)
+            yield()
+            android.util.Log.d(
+                "DocumentParser",
+                "Using standard HTML parsing (no chapter-tab structure detected or chapter parsing failed)"
+            )
+        }
+
+        if (
+            readerText.filterIsInstance<ReaderText.Text>().isEmpty() ||
+            (includeChapter && readerText.filterIsInstance<ReaderText.Chapter>().isEmpty())
+        ) {
+            return emptyList()
+        }
+
+        return readerText
+    }
+
+    /**
+     * Parse HTML book with chapter-tab structure
+     */
+    private suspend fun parseHtmlBookWithChapters(
+        document: Document,
+        zipFile: ZipFile? = null,
+        imageEntries: List<ZipEntry>? = null
+    ): List<ReaderText> {
+        val readerText = mutableListOf<ReaderText>()
+        
+        try {
+            // Process each chapter-tab div
+            val chapterTabs = document.select("div.chapter-tab")
+
+            if (chapterTabs.isEmpty()) {
+                return emptyList()
+            }
+            
+            chapterTabs.forEachIndexed { index, chapterDiv ->
+                yield()
+                
+                try {
+                    // Extract chapter title from h2
+                    val h2Element = chapterDiv.selectFirst("h2")
+                    val chapterTitle = h2Element?.text()?.trim() ?: "Unknown Chapter"
+
+                    // Add chapter
+                    readerText.add(
+                        ReaderText.Chapter(
+                            title = chapterTitle,
+                            nested = false
+                        )
+                    )
+                    
+                    // Process content within the chapter
+                    val chapterContent = handleContent(element = chapterDiv, zipFile = zipFile, imageEntries = imageEntries, includeChapter = false)
+                    readerText.addAll(chapterContent)
+                    
+
+                    // Add separator between chapters (except after the last one)
+                    if (chapterDiv != chapterTabs.last()) {
+                        readerText.add(ReaderText.Separator)
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("DocumentParser", "Error processing chapter ${index + 1}: ${e.message}")
+                    e.printStackTrace()
+                }
+            }
+            
+            android.util.Log.d("DocumentParser", "HTML book parsing completed. Total elements: ${readerText.size}")
+            
+            // Validate that we have at least some content
+            if (readerText.filterIsInstance<ReaderText.Text>().isEmpty()) {
+                android.util.Log.w("DocumentParser", "No text content found in HTML book")
+                return emptyList()
+            }
+            
+            return readerText
+            
+        } catch (e: Exception) {
+            android.util.Log.e("DocumentParser", "Error parsing HTML book with chapters: ${e.message}")
+            e.printStackTrace()
+            return emptyList()
+        }
+    }
+
+
+    private suspend fun handleContent(
+        element: Element,
+        zipFile: ZipFile? = null,
+        imageEntries: List<ZipEntry>? = null,
+        includeChapter: Boolean = true
+    ): List<ReaderText> {
+        val readerText = mutableListOf<ReaderText>()
+        var chapterAdded = false
+
+        element
             .apply {
                 // Remove manual line breaks from all <p>, <a>
                 select("p").forEach { element ->
@@ -207,16 +313,6 @@ class DocumentParser @Inject constructor(
                     }
                 }
             }
-
-        yield()
-
-        if (
-            readerText.filterIsInstance<ReaderText.Text>().isEmpty() ||
-            (includeChapter && readerText.filterIsInstance<ReaderText.Chapter>().isEmpty())
-        ) {
-            return emptyList()
-        }
-
         return readerText
     }
 
