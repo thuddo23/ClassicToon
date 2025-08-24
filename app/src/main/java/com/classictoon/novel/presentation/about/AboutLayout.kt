@@ -1,5 +1,5 @@
 /*
- * Book's Story — free and open-source Material You eBook reader.
+ * ClassicToon — free and open-source Material You eBook reader.
  * Copyright (C) 2024-2025 Acclorite
  * SPDX-License-Identifier: GPL-3.0-only
  */
@@ -81,7 +81,7 @@ fun AboutLayout(
         item {
             AboutItem(
                 title = stringResource(id = R.string.app_version_option),
-                description = "Book's Story v${stringResource(id = R.string.app_version)}",
+                description = "ClassicToon v${stringResource(id = R.string.app_version)}",
             ) {
                 navigateToBrowserPage(
                     AboutEvent.OnNavigateToBrowserPage(
