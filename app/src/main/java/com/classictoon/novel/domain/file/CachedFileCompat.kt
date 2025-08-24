@@ -37,6 +37,16 @@ object CachedFileCompat {
         path: String,
         builder: CachedFileBuilder? = null
     ): CachedFile? {
+        android.util.Log.d("CachedFileCompat", "fromFullPath called with path: $path")
+        
+        // Check if this is an internal app file path
+        if (isInternalAppFile(context, path)) {
+            android.util.Log.d("CachedFileCompat", "Detected internal app file: $path")
+            return createInternalFileCachedFile(context, path, builder)
+        }
+        
+        android.util.Log.d("CachedFileCompat", "Treating as external file, using SAF: $path")
+        // Handle external storage files using SAF
         val uri = try {
             val storageId = DocumentFileCompat.getStorageId(context, path)
             if (storageId.isBlank()) throw NullPointerException("Could not get storageId.")
@@ -62,6 +72,7 @@ object CachedFileCompat {
 
             DocumentsContract.buildDocumentUriUsingTree(parentUri, "$storageId:$basePath")
         } catch (e: Exception) {
+            android.util.Log.e("CachedFileCompat", "Error creating SAF URI for path: $path", e)
             e.printStackTrace()
             return null
         }
@@ -83,8 +94,72 @@ object CachedFileCompat {
             builder = builder
         )
 
-        if (!cachedFile.canAccess()) return null
+        if (!cachedFile.canAccess()) {
+            android.util.Log.e("CachedFileCompat", "CachedFile cannot access URI: ${cachedFile.uri}")
+            return null
+        }
         return cachedFile
+    }
+
+    /**
+     * Check if the given path is within the app's internal storage
+     */
+    private fun isInternalAppFile(context: Context, path: String): Boolean {
+        val internalFilesDir = context.filesDir.absolutePath
+        val internalCacheDir = context.cacheDir.absolutePath
+        val internalDataDir = context.dataDir.absolutePath
+        
+        return path.startsWith(internalFilesDir, ignoreCase = true) ||
+               path.startsWith(internalCacheDir, ignoreCase = true) ||
+               path.startsWith(internalDataDir, ignoreCase = true)
+    }
+
+    /**
+     * Create a CachedFile for internal app files that can be accessed directly
+     */
+    private fun createInternalFileCachedFile(
+        context: Context,
+        path: String,
+        builder: CachedFileBuilder?
+    ): CachedFile? {
+        val file = java.io.File(path)
+        android.util.Log.d("CachedFileCompat", "Creating internal file CachedFile for: $path")
+        android.util.Log.d("CachedFileCompat", "File exists: ${file.exists()}, Can read: ${file.canRead()}")
+        
+        if (!file.exists() || !file.canRead()) {
+            android.util.Log.e("CachedFileCompat", "Internal file cannot be accessed: $path")
+            return null
+        }
+        
+        android.util.Log.d("CachedFileCompat", "Successfully created internal file CachedFile for: $path")
+        return object : CachedFile(
+            context = context,
+            uri = Uri.fromFile(file),
+            builder = builder ?: CachedFileCompat.build(
+                name = file.name,
+                path = file.absolutePath,
+                size = file.length(),
+                lastModified = file.lastModified(),
+                isDirectory = file.isDirectory
+            )
+        ) {
+            override fun canAccess(): Boolean {
+                val canAccess = file.exists() && file.canRead()
+                android.util.Log.d("CachedFileCompat", "Internal file canAccess check: $canAccess for $path")
+                return canAccess
+            }
+            
+            override fun openInputStream(): java.io.InputStream? {
+                return try {
+                    android.util.Log.d("CachedFileCompat", "Opening input stream for internal file: $path")
+                    file.inputStream()
+                } catch (e: Exception) {
+                    android.util.Log.e("CachedFileCompat", "Failed to open input stream for internal file: $path", e)
+                    e.printStackTrace()
+                    null
+                }
+            }
+        }
     }
 
     fun build(

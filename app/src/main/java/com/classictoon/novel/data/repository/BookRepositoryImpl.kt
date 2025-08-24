@@ -101,6 +101,8 @@ class BookRepositoryImpl @Inject constructor(
         if (bookId == -1) return emptyList()
 
         val book = database.findBookById(bookId)
+        Log.i(GET_TEXT, "Loading text for book [$bookId] with file path: ${book.filePath}")
+        
         val cachedFile = CachedFileCompat.fromFullPath(
             context = application,
             path = book.filePath,
@@ -112,7 +114,14 @@ class BookRepositoryImpl @Inject constructor(
         )
 
         if (cachedFile == null || !cachedFile.canAccess()) {
-            Log.e(GET_TEXT, "File [$bookId] does not exist")
+            Log.e(GET_TEXT, "File [$bookId] does not exist or cannot be accessed. Path: ${book.filePath}")
+            // Check if it's an internal file and log additional info
+            val file = File(book.filePath)
+            if (file.exists()) {
+                Log.e(GET_TEXT, "File exists but cannot be accessed. Can read: ${file.canRead()}, Can write: ${file.canWrite()}")
+            } else {
+                Log.e(GET_TEXT, "File does not exist at path: ${book.filePath}")
+            }
             return emptyList()
         }
 

@@ -55,8 +55,9 @@ fun ChapterSection(
     // Check if content is downloaded
     LaunchedEffect(bookId, bookTitle) {
         // TODO update save real file here
-        val fileName = "sample_book.html"
-        val file = File("${folder}/books/$fileName")
+        val fileName = "book_${bookId}.html"
+        val booksDir = File("${folder}/books")
+        val file = File(booksDir, fileName)
         isContentDownloaded = file.exists()
         
         if (isContentDownloaded) {
@@ -74,8 +75,9 @@ fun ChapterSection(
             // Check again if content was downloaded
             // TODO update save real file here
 //            val fileName = "${bookTitle.lowercase().replace(" ", "_")}.html"
-            val fileName = "sample_book.html"
-            val file = File("${folder}/books/$fileName")
+            val fileName = "book_${bookId}.html"
+            val booksDir = File("${folder}/books")
+            val file = File(booksDir, fileName)
             if (file.exists()) {
                 isContentDownloaded = true
                 isLoadingChapters = true

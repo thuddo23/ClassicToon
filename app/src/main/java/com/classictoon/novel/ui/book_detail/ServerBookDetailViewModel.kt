@@ -73,16 +73,22 @@ class ServerBookDetailViewModel @Inject constructor(
                 // Get the book content from the server
                 val content = getServerBookContentUseCase(bookId)
                 // TODO update save real file here
-                // Save to internal storage
-                val fileName = "sample_book.html"
+                // Save to internal storage with unique filename
+                val fileName = "book_${bookId}.html"
                 val rootDir = context.filesDir.path
-                val file = File("${rootDir}/books/$fileName")
+                val booksDir = File("${rootDir}/books")
+                val file = File(booksDir, fileName)
                 
                 // Ensure directory exists
-                file.parentFile?.mkdirs()
+                if (!booksDir.exists()) {
+                    val created = booksDir.mkdirs()
+                    android.util.Log.d("ServerBookDetailViewModel", "Created books directory: $created, Path: ${booksDir.absolutePath}")
+                }
                 
                 // Write content to file
                 file.writeText(content)
+                android.util.Log.d("ServerBookDetailViewModel", "Successfully wrote book content to: ${file.absolutePath}")
+                android.util.Log.d("ServerBookDetailViewModel", "File exists: ${file.exists()}, Can read: ${file.canRead()}, Size: ${file.length()}")
                 
                 // Create a Book entity for Room database
                 val bookForRoom = Book(
@@ -112,6 +118,7 @@ class ServerBookDetailViewModel @Inject constructor(
                     savedFileName = fileName
                 )
             } catch (e: Exception) {
+                android.util.Log.e("ServerBookDetailViewModel", "Error downloading book content for book $bookId", e)
                 _uiState.value = _uiState.value.copy(
                     error = e.message ?: "Failed to download book content",
                     isDownloadingContent = false
